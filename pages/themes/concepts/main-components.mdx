@@ -1,0 +1,74 @@
+# Theme components
+
+![Theme](/images/Theme.png)
+
+Every Built.js Theme consists of:
+- Modules
+- Pages
+- Sections
+- Templates
+- Elements
+
+You can use the [Built.JS Studio](https://studio.builtjs.com) to choose which of these Theme components to generate into a Next.JS frontend Site with accompanying Strapi CMS. Read more [here](/what-is-a-theme).
+
+## Sites
+A Site is a combination of Modules, Pages, Sections and Templates from a Theme, configured by the end user through the [Built.JS Studio](https://studio.builtjs.com). 
+
+![Site](/images/Site.png)
+
+## Modules
+
+![Module](/images/Module.png)
+
+A Module is represents a use case, like "Make Contact" or "View Features" but is usually named with one word (like "Contact" or "Features").
+
+For example, if you have a client who wants a blog in their website, the use cases might look like this:
+
+- View Blog Entry List
+- View Blog Entry
+  - View Related Blog Enties
+
+From an information architecture point of view, this might result in two pages:
+- Blog List Page
+- Blog Entry
+
+The Blog List Page may have one section:
+- Blog List
+
+And the Blog Entry page may have two sections:
+- Blog Entry
+- Related Entries
+
+You might also have some supporting sections on other page, such as a Blog teaser section on the Home Page:
+- Blog Teaser
+
+In a Built.js theme, all of these things would be encapsulated in what we call a "Module" (which might be called "Blog").
+
+## Pages
+
+![Pages](/images/Pages.png)
+
+A Page is a reference to a page in the site. 
+
+## Sections
+
+![Sections](/images/Sections.png)
+
+A Section is a main part of a website page. 
+It has a number of fields. 
+It contains one or more Templates.
+In the backend CMS, a Section is represented as a Strapi component. 
+
+## PageSections
+A PageSection contains a Page and a collection of Sections.
+
+## Templates
+
+![Templates](/images/Templates.png)
+
+A Template represents the user interface of a Section. For example, the UI for a FAQ Section could be designed in a number of ways - an accordian, a list, etc. You can create a template for each of these designs and add them to your Section. Then in the [Built.JS Studio](https://studio.builtjs.com) the end user of the Theme can decide which Template to use for the Section.
+
+A Template contains a reference to a React component. A Template may contain Elements.
+
+## Elements
+An Element is a smaller resuable portion of the site, like a button. In the frontend, it is represented as a React component. In the backend, it is represented as a Strapi component.

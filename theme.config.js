@@ -1,41 +1,187 @@
 export default {
-  repository: 'https://github.com/shuding/nextra',
-  titleSuffix: ' – Nextra',
+  repository: 'https://github.com/builtjs/builtjs-docs',
+  titleSuffix: ' – Built.js',
   logo: (
     <>
-      <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
-      <span className="text-gray-600 font-normal hidden md:inline">
-        The Next Site Builder
-      </span>
+      <div className="flex items-center">
+        <svg
+          className="mr-5"
+          viewBox="0 0 241 62"
+          xmlns="http://www.w3.org/2000/svg"
+          width="180"
+          height="62"
+        >
+          <g fill="##444f5f">
+            <path
+              d="m.208-.513c.009 0 .018.004.025.01.006.007.01.016.01.025v.254c0 .063.031.095.092.095s.092-.032.092-.095v-.254c0-.009.004-.018.01-.025.007-.006.016-.01.025-.01h.111c.009 0 .018.004.025.01.006.007.01.016.01.025v.289c0 .069-.023.121-.068.156-.046.035-.114.052-.205.052s-.159-.017-.204-.052c-.046-.035-.069-.087-.069-.156v-.289c0-.009.004-.018.01-.025.007-.006.016-.01.025-.01z"
+              transform="matrix(56.5090080549 0 0 56.5090080549 98.5140938151 46.9063485244)"
+            ></path>
+            <path
+              d="m.208-.513c.009 0 .018.004.025.01.006.007.01.016.01.025v.443c0 .009-.004.018-.01.025-.007.006-.016.01-.025.01-.032 0-.079 0-.111 0-.009 0-.018-.004-.025-.01-.006-.007-.01-.016-.01-.025 0-.094 0-.349 0-.443 0-.009.004-.018.01-.025.007-.006.016-.01.025-.01z"
+              transform="matrix(56.5090080549 0 0 56.5090080549 135.0196504851 46.9063485244)"
+            ></path>
+            <path
+              d="m.208-.83c.009 0 .018.004.025.01.006.007.01.016.01.025v.76c0 .009-.004.018-.01.025-.007.006-.016.01-.025.01-.032 0-.079 0-.111 0-.009 0-.018-.004-.025-.01-.006-.007-.01-.016-.01-.025v-.76c0-.009.004-.018.01-.025.007-.006.016-.01.025-.01z"
+              transform="matrix(56.5090080549 0 0 56.5090080549 150.9038145051 46.9063485244)"
+            ></path>
+            <path
+              d="m.264-.513v.478c0 .009-.004.018-.01.025-.007.006-.016.01-.025.01-.032 0-.079 0-.111 0-.009 0-.018-.004-.025-.01-.006-.007-.01-.016-.01-.025v-.76c0-.009.004-.018.01-.025.007-.006.016-.01.025-.01h.111c.009 0 .018.004.025.01.006.007.01.016.01.025v.146h.068c.019 0 .035.016.035.035v.066c0 .019-.016.035-.035.035z"
+              transform="matrix(56.5090080549 0 0 56.5090080549 165.5971040451 46.9063485244)"
+            ></path>
+            <path
+              d="m.208-.513c.009 0 .018.004.025.01.006.007.01.016.01.025v.699c0 .009-.004.018-.01.025-.007.006-.016.01-.025.01-.032 0-.079 0-.111 0-.009 0-.018-.004-.025-.01-.006-.007-.01-.016-.01-.025 0-.129 0-.57 0-.699 0-.009.004-.018.01-.025.007-.006.016-.01.025-.01z"
+              transform="matrix(56.5090080549 0 0 56.5090080549 198.5387937051 46.9063485244)"
+            ></path>
+            <path
+              d="m.417-.411c-.008.016-.027.024-.044.017-.023-.009-.046-.013-.069-.013-.017 0-.03.003-.04.01-.011.007-.016.016-.016.027 0 .006.001.011.003.014.001.004.005.008.011.011.005.003.014.006.025.009s.025.006.043.01c.05.01.087.028.112.053.025.026.037.059.037.099 0 .03-.006.057-.018.081s-.029.044-.05.06c-.021.017-.047.029-.077.039-.03.008-.063.013-.099.013-.058 0-.116-.014-.173-.042-.009-.004-.015-.012-.018-.021s-.002-.019.002-.027c.01-.019.022-.043.032-.063.005-.008.013-.015.022-.018s.019-.002.027.003c.04.022.077.033.113.033.017 0 .03-.004.041-.011s.016-.017.016-.028c0-.007-.001-.012-.002-.017-.002-.004-.006-.008-.011-.012-.005-.003-.013-.007-.023-.01-.011-.003-.024-.006-.041-.009-.056-.011-.095-.028-.117-.051-.023-.022-.034-.053-.034-.092 0-.029.005-.055.016-.078s.026-.042.046-.058.044-.028.073-.037c.028-.009.059-.013.094-.013.043 0 .084.006.125.019.01.003.018.01.022.02s.004.021-.001.03c-.008.017-.018.036-.027.052z"
+              transform="matrix(55.8985973196 0 0 55.8985973196 214.0201619451 46.9151049544)"
+            ></path>
+            <path
+              d="m.471-.255c0-.016-.003-.031-.009-.046-.006-.014-.014-.026-.025-.037s-.023-.019-.037-.026c-.014-.006-.029-.009-.046-.009-.016 0-.031.003-.045.009s-.026.014-.036.025c-.011.011-.019.023-.025.037-.007.015-.01.03-.01.046s.003.031.009.045.014.026.025.036c.011.011.023.019.038.025.014.007.029.01.045.01s.031-.003.045-.009.026-.014.037-.025c.01-.011.018-.023.025-.037.006-.014.009-.029.009-.044zm-.263-.575c.009 0 .018.004.025.01.006.007.01.016.01.025v.333c.043-.045.096-.067.16-.067.038 0 .073.007.105.021.031.015.058.034.081.058.022.025.039.053.052.086s.019.069.019.106c0 .038-.006.074-.019.107-.014.033-.032.062-.055.087s-.051.044-.082.058c-.032.015-.066.022-.103.022-.067 0-.119-.024-.158-.073v.022c0 .009-.004.018-.01.025-.007.006-.016.01-.025.01h-.111c-.009 0-.018-.004-.025-.01-.006-.007-.01-.016-.01-.025v-.76c0-.009.004-.018.01-.025.007-.006.016-.01.025-.01z"
+              transform="matrix(56.5090080549 0 0 56.5090080549 59.0751330951 47.0727206944)"
+            ></path>
+          </g>
+          <g fill="var(--clr-secondary)">
+            <path
+              d="m3843.36 7555.59c0-1.36-.54-2.66-1.5-3.62s-2.26-1.5-3.62-1.5c-4.61 0-11.35 0-15.96 0-1.35 0-2.66.54-3.62 1.5s-1.5 2.26-1.5 3.62v15.95c0 1.36.54 2.66 1.5 3.63.96.96 2.27 1.5 3.62 1.5h15.96c1.36 0 2.66-.54 3.62-1.5.96-.97 1.5-2.27 1.5-3.63 0-4.61 0-11.34 0-15.95z"
+              transform="matrix(.39036340069 0 0 .39036340069 -1303.9157349849 -2910.7442561456)"
+            ></path>
+            <path
+              d="m3843.36 7555.59c0-1.36-.54-2.66-1.5-3.62s-2.26-1.5-3.62-1.5h-15.96c-1.35 0-2.66.54-3.62 1.5s-1.5 2.26-1.5 3.62v15.95c0 1.36.54 2.66 1.5 3.63.96.96 2.27 1.5 3.62 1.5h15.96c1.36 0 2.66-.54 3.62-1.5.96-.97 1.5-2.27 1.5-3.63 0-4.61 0-11.34 0-15.95z"
+              transform="matrix(.39036340069 0 0 .39036340069 -1288.0315709649 -2947.4249414156)"
+            ></path>
+            <path
+              d="m3843.36 7555.59c0-1.36-.54-2.66-1.5-3.62s-2.26-1.5-3.62-1.5h-15.96c-1.35 0-2.66.54-3.62 1.5s-1.5 2.26-1.5 3.62v15.95c0 1.36.54 2.66 1.5 3.63.96.96 2.27 1.5 3.62 1.5h15.96c1.36 0 2.66-.54 3.62-1.5.96-.97 1.5-2.27 1.5-3.63z"
+              transform="matrix(.39036340069 0 0 .39036340069 -1351.5507141849 -2947.4249414156)"
+            ></path>
+          </g>
+          <g>
+            <path
+              d="m8608.64 6977.4c.53-.47 1.23-.76 2-.76h8.79c1.66 0 3 1.34 3 3v8.79c0 .46-.1.9-.29 1.29.39-.18.83-.29 1.29-.29h8.8c1.66 0 3 1.35 3 3v8.8c0 .77-.27 1.5-.78 2.01-1.3 1.3-4.7 4.73-6.38 6.41-.38.38-.89.59-1.42.59h-9.22c-.77 0-1.47-.29-2-.77-.53.48-1.24.77-2 .77h-9.78c-1.1 0-2-.9-2-2 0 0 0-9.66 0-9.94 0-.39.12-.8.29-1.15-.39.19-.83.29-1.29.29-.25 0-9.79 0-9.79 0-1.11 0-2-.89-2-2 0-2.91 0-8.2 0-10.23 0-.53.21-1.04.58-1.42 1.69-1.68 5.13-5.11 6.42-6.4.5-.5 1.22-.75 1.99-.75h8.79c.77 0 1.47.29 2 .76z"
+              fill="var(--clr-secondary)"
+              transform="matrix(1.09661151105 0 0 1.09661151105 -9418.6357536 -7640.41678757)"
+            ></path>
+            <g
+              fill="#fff"
+              transform="matrix(1.09661151105 0 0 1.09661151105 -9418.6357536 -7640.41678757)"
+            >
+              <path d="m8633.23 6992.43v8.8c0 .55-.45 1-1 1h-8.8c-.55 0-1-.45-1-1v-8.8c0-.55.45-1 1-1h8.8c.55 0 1 .45 1 1z"></path>
+              <path d="m8620.43 6992.43v8.8c0 .55-.44 1-1 1h-8.79c-.55 0-1-.45-1-1v-8.8c0-.55.45-1 1-1h8.79c.56 0 1 .45 1 1z"></path>
+              <path d="m8607.64 6979.64v8.79c0 .55-.45 1-1 1h-8.79c-.55 0-1-.45-1-1v-8.79c0-.55.45-1 1-1h8.79c.55 0 1 .45 1 1z"></path>
+              <path d="m8620.43 6979.64v8.79c0 .55-.44 1-1 1h-8.79c-.55 0-1-.45-1-1v-8.79c0-.55.45-1 1-1h8.79c.56 0 1 .45 1 1z"></path>
+            </g>
+          </g>
+        </svg>
+        <span className="mr-40 text-gray-600 font-normal hidden md:inline">
+          Docs
+        </span>
+      </div>
     </>
   ),
+  // topnav: (
+  //   <>
+  //     <nav className="invisible xl:visible">
+  //       <ul className="flex flex-wrap">
+  //         <li>
+  //           <a
+  //             className={`no-underline ml-8 text-gray-700 transition duration-200 hover:text-secondary`}
+  //             href="/features"
+  //           >
+  //             Features
+  //           </a>
+  //         </li>
+  //         <li>
+  //           <a
+  //             className={`no-underline ml-8 text-gray-700 transition duration-200 hover:text-secondary`}
+  //             href="/pricing"
+  //           >
+  //             Pricing
+  //           </a>
+  //         </li>
+  //         <li>
+  //           <a
+  //             className={`no-underline ml-8 text-gray-700 transition duration-200 hover:text-secondary`}
+  //             href="/resources"
+  //           >
+  //             Resources
+  //           </a>
+  //         </li>
+  //         <li>
+  //           <a
+  //             className={`no-underline active ml-8 text-gray-700 transition duration-200 hover:text-secondary`}
+  //             href="/docs"
+  //           >
+  //             Docs
+  //           </a>
+  //         </li>
+  //         <li>
+  //           <a
+  //             className={`no-underline ml-8 text-gray-700 transition duration-200 hover:text-secondary`}
+  //             href="/community"
+  //           >
+  //             Community
+  //           </a>
+  //         </li>
+  //         <li>
+  //           <a
+  //             className={`no-underline ml-8 text-gray-700 transition duration-200 hover:text-secondary`}
+  //             href="/posts"
+  //           >
+  //             Posts
+  //           </a>
+  //         </li>
+  //       </ul>
+  //     </nav>
+  //   </>
+  // ),
   head: (
     <>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="Content-Language" content="en" />
-      <meta name="description" content="Nextra: the next site builder" />
-      <meta name="og:description" content="Nextra: the next site builder" />
+      <meta name="description" content="Built.JS Docs" />
+      {/* <meta name="og:description" content="Nextra: the next site builder" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://nextra.vercel.app/og.png" />
       <meta name="twitter:site:domain" content="nextra.vercel.app" />
-      <meta name="twitter:url" content="https://nextra.vercel.app" />
-      <meta name="og:title" content="Nextra: Next.js static site generator" />
-      <meta name="og:image" content="https://nextra.vercel.app/og.png" />
-      <meta name="apple-mobile-web-app-title" content="Nextra" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png"/>
+      <meta name="twitter:url" content="https://nextra.vercel.app" /> */}
+      <meta name="og:title" content="Built.JS Docs" />
+      {/* <meta name="og:image" content="https://nextra.vercel.app/og.png" /> */}
+      <meta name="apple-mobile-web-app-title" content="Built.JS Docs" />
+      <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/images/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/images/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/images/favicon-16x16.png"
+      />
+      {/* <link rel="manifest" href="/site.webmanifest" /> */}
+      {/* <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png"/>
       <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png"/>
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
       <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"/>
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-      <meta name="msapplication-TileImage" content="/ms-icon-144x144.png"/>
+      <meta name="msapplication-TileImage" content="/ms-icon-144x144.png"/> */}
     </>
   ),
   search: true,
+  darkMode: false,
   prevLinks: true,
   nextLinks: true,
   footer: true,
+  docsRepository: 'https://github.com/builtjs/builtjs-docs/edit',
   footerEditOnGitHubLink: true,
-  footerText: <>MIT {new Date().getFullYear()} © Nextra.</>
+  footerText: <>{new Date().getFullYear()} © Built.js</>,
 }

@@ -1,5 +1,5 @@
 {
-  "name": "nextra",
+  "name": "builtjs-docs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,7 +18,10 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "prettier": "^2.0.5"
+    "autoprefixer": "^10.3.1",
+    "postcss": "^8.3.6",
+    "prettier": "^2.0.5",
+    "tailwindcss": "^2.2.7"
   },
   "prettier": {
     "semi": false,

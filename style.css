@@ -1,0 +1,7 @@
+:root{
+    --clr-secondary: #F3A83B;
+}
+
+.active {
+    color: var(--clr-secondary);
+}

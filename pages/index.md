@@ -1,7 +1,12 @@
-# Nextra
+# Built.js
 
-**Nextra** is a [Next.js](https://nextjs.org) based static site generator. 0 lines of code needed.  
+**Built.js** is a platform for CMS-backed [Next.js](https://nextjs.org) websites. Make modular Themes in Javascript and use the [Built.JS Studio](https://studio.builtjs.com) to configure how to build the Site. 
 
-It supports Markdown with React components ([MDX](/docs/mdx)), automatically generated [sidebar and anchor links](/docs/anchors), file-system based routing, built-in syntax highlighting, i18n and more.
+Make client use cases the starting point for your website design.
 
-![](/demo.png)
+![demo](/images/builtjs-ui-vis.png)
+
+## Mission
+We want to make it easy for product designers and developers to meet stakeholder needs.   
+
+
