@@ -1,0 +1,48 @@
+# What are Modules?
+
+![Theme](/images/modules-0.png)
+
+A Module is represents a use case, like "Make Contact" or "View Features" but is usually named simply with one word (like "Contact" or "Features").
+
+For example, if you have a client who wants a their audience to learn about their business in their website, the use case might look like this:
+
+- Learn about business
+
+From an information architecture point of view, this might result in this:
+- About page
+- About Teaser section (on Home page)
+
+The About Page may have one section:
+- About section
+
+And the Home page will have one section:
+- About Teaser section
+
+![Theme](/images/choose-your-modules.png)
+
+In a Built.js Theme, all of this would be encapsulated in what we call a "Module" (in this case called "About").
+
+The code to create this module in your Built.JS Theme would look like this:
+
+```
+{
+  "modules": [
+    {
+      "slug": "about",
+      "displayName": "About",
+      "description": "Provides information related to the organisation",
+      "pageSections": [
+        {
+          "slug": "about-base"
+        },
+        {
+          "slug": "home-about-teaser"
+        }
+      ]
+    }
+  ]
+}
+```
+[https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/modules.json](https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/modules.json)
+
+To learn more about how the core components of a Built.JS Theme related to each other, check out the [Data Model Reference](/themes/data-model-reference).

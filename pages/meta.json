@@ -1,6 +1,5 @@
 {
   "index": "Built.js",
-  "frontend": "Next.js Frontend",
-  "backend-cms": "Strapi Backend CMS",
-  "themes": "Themes"
+  "themes": "Themes",
+  "concepts": "Concepts"
 }

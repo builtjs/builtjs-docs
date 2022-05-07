@@ -1,0 +1,618 @@
+# Data Model Reference
+
+![Theme](/images/Theme.png)
+
+<h2 id="core-components">Core Components</h2>
+Every Built.js Theme consists of architecture, content model, and metadata components components. Each component has its own data model which will be used by the [Built.JS Studio](https://studio.builtjs.com) to create a site.
+
+### Architecture Components
+- <a href="#modules">Modules</a>
+- <a href="#pages">Pages</a>
+- <a href="#sections">Sections</a>
+- <a href="#templates">Templates</a>
+- <a href="#elements">Elements</a>
+- <a href="#layout">Layout</a>
+
+### Content Model Components
+- <a href="#content-types">Content Types</a>
+
+### Metadata Components
+- <a href="#app">App</a>
+- <a href="#global">Global</a>
+
+If you haven't already, you can read more about Built.JS Themes [here](/what-is-a-theme).
+
+<h2 id="modules">Modules</h2>
+
+A Module is represents a business use case, like "Make Contact" but is usually named simply with one word (like "Contact"). Learn more about Modules [here](/concepts/what-are-modules).
+
+
+<h3>Module Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `pluralName` | String | Plural name of Module (lower case with dashes) |
+| `required` | Boolean | Determines if Module is required |
+| `pageSections` | Array | PageSections used in the Module |
+
+<h3>Example</h3>
+`public/data/modules.json`
+```
+{
+  "modules": {
+    "slug": "introduce",
+    "displayName": "Introduce",
+    "description": "Familiarizes users with your product or service",
+    "required": true,
+    "pageSections": [
+      {
+        "slug": "home-base"
+      }
+  ]
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/modules.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/modules.json</a>
+
+<h2 id="pages">Pages</h2>
+
+A Page is a reference to a page in the site. 
+
+<h3>Page Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `singularName` | String | Singular name of Page (lower case with dashes) |
+| `pluralName` | String | Plural name of Page (lower case with dashes) |
+| `displayName` | String | Name of page |
+| `demoSections` | Array | Sections to display for theme demo Page |
+
+<h3>Example</h3>
+`public/data/pages.json`
+```
+{
+  "pages": {
+    "site": [
+        "slug": "home",
+        "singularName": "home",
+        "pluralName": "homes",
+        "displayName": "Home",
+        "demoSections": [
+          {
+            "slug": "home-seo"
+          },
+          {
+            "slug": "main-landing"
+          },
+          {
+            "slug": "benefits-list"
+          },
+          {
+            "slug": "home-about-teaser"
+          }
+        ]
+      }
+    ]
+}
+
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/pages.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/pages.json</a>
+
+<h2 id="sections">Sections</h2>
+
+A Section is a main part of a website page. It contains one or more Templates.
+
+<h3>Section Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `category` | String | Category of Section (possible values: "layout","body") |
+| `displayName` | String | Name of Section |
+| `description` | String | Description of Section |
+| `templates` | Array | References templates used by Section |
+| `defaultTemplate` | Object | Template that will be used by default |
+| `collections` | Array | References collections used by Section |
+| `position` | String | For layout Sections only (possible values: "start","end") |
+| `order` | Number | Where the Section will sit (number between 0 and 10) |
+
+<h3>Example</h3>
+`public/data/sections.json`
+```{
+  "sections": {
+    "slug": "footer-1",
+      "category": "layout",
+      "displayName": "Footer 1",
+      "description": "The footer acts as a safety net for users and usually contains secondary site navigation.",
+      "templates": ["footer-1", "footer-2"],
+      "defaultTemplate": {
+        "slug": "footer-1"
+      },
+      "position": "end",
+      "collections": {
+        "primary-menu-items": {},
+        "social-links": {}
+      },
+      "order": 10
+    }
+  }
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/sections.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/sections.json</a>
+
+In the backend CMS, a Section is represented as a Strapi component. This is the data model for the CMS:
+
+<h3>Section Data Model (for CMS)</h3>
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `category` | String | Category of Section (possible values: "layout","body") |
+| `settings` | Object | Strapi configuration object |
+
+<h3>Example</h3>
+`public/data/strapi/sections.json`
+```
+{
+  "sections": 
+    "header-1": {
+      "slug": "header-1",
+      "category": "layout",
+      "settings": {
+        "collectionName": "components_layout_header_1",
+        "info": {
+          "displayName": "Header",
+          "icon": "heading"
+        },
+        "attributes": {
+          "buttonLinks": {
+            "type": "component",
+            "repeatable": true,
+            "component": "elements.button-link"
+          }
+        }
+      }
+  }
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/strapi/sections.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/data/strapi/sections.json</a>
+
+<h2 id="pagesections">PageSections</h2>
+A PageSection contains a Page and a collection of Sections.
+
+<h3>PageSection Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `description` | String | Description of pageSection |
+| `page` | Object | Page used in the PageSection |
+| `sections` | Array | Sections used in the PageSection |
+
+<h3>Example</h3>
+`public/data/page-sections.json`
+```
+{
+  "pageSections": [
+    {
+      "slug": "contact-base",
+      "description": "Contact page base sections",
+      "page": {
+        "slug": "contact"
+      },
+      "sections": [
+        {
+          "slug": "contact-seo"
+        },
+        {
+          "slug": "contact-landing"
+        }
+      ]
+    }
+  ]
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/page-sections.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/page-sections.json</a>
+
+<h2 id="templates">Templates</h2>
+
+A Template represents the user interface of a Section. For example, the UI for a FAQ Section could be designed in a number of ways - an accordian, a list, etc. You can create a template for each of these designs and add them to your Section. Then in the [Built.JS Studio](https://studio.builtjs.com) the end user of the Theme can decide which Template to use for the Section.
+
+A Template contains a reference to a React component. A Template may contain Elements.
+
+<h3>Template Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `displayName` | String | Name of Section |
+| `description` | String | Description of pageSection |
+| `images` | Array | Images of Template interface (possible values: "thumb", "lrg") |
+| `repoUrl` | String | Web address of git repository |
+| `demoUrl` | String | Web address of demo website |
+
+<h3>Example</h3>
+`public/data/templates.json`
+```
+{
+  "templates": [
+    {
+      "slug": "header-1",
+      "displayName": "Header 1",
+      "category": "headers",
+      "description": "Simple header with justified logo and nav links.",
+      "images": {
+        "thumb": "https://raw.githubusercontent.com/builtjs/builtjs-theme-corporate-tailwind/main/components/templates/headers/header-1/header-1.png",
+        "lrg": "https://raw.githubusercontent.com/builtjs/builtjs-theme-corporate-tailwind/main/components/templates/headers/header-1/header-1.png"
+      },
+      "repoUrl": "https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/components/templates/headers/header-1/header-1.js",
+      "demoUrl": "https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/components/templates/headers/header-1/header-1.js"
+    }
+  ]
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/templates.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/templates.json</a>
+
+<h2 id="elements">Elements</h2>
+An Element is a resuable portion of the site, like a button. For the frontend, it is represented as a React component and is referenced only in code. In the backend, it is represented as a Strapi component and uses the following data model:
+
+<h3>Element Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `category` | String | Category of Element |
+| `displayName` | String | Name of Element |
+| `settings` | Object | Strapi config object |
+
+<h3>Example</h3>
+`public/data/strapi/elements.json`
+```
+{
+  "elements": [
+    {
+      "slug": "button-link",
+      "category": "elements",
+      "displayName": "Button Link",
+      "settings": {
+        "collectionName": "components_elements_button_link",
+        "info": {
+          "displayName": "Button Link",
+          "icon": "heading"
+        },
+        "options": { "increments": true, "timestamps": true, "draftAndPublish": true },
+        "attributes": {
+          "label": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/strapi/elements.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/strapi/elements.json</a>
+
+<h2 id="articles">Articles</h2>
+An Article is a detail page for a list of items, like blog entries.
+
+<h3>Article Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `singularName` | String | Singular name of Article |
+| `pluralName` | String | Plural name of Article |
+| `displayName` | String | Name of Article |
+| `contentType` | String | Slug of Content Type |
+| `listPage` | Object | Page that contains list of items |
+
+<h3>Example</h3>
+`public/data/articles.json`
+```
+{
+  "articles": [
+    {
+      "slug": "blog-article",
+      "singularName": "blog-article",
+      "pluralName": "blog-articles",
+      "displayName": "Blog Article",
+      "contentType": "blog-item",
+      "listPage": {
+        "slug": "blog"
+      }
+    }
+  ]
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/articles.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/articles.json</a>
+
+<h2 id="layout">Layout</h2>
+Layout specifies the header and footer sections of a site.
+
+<h3>Layout Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `sections` | Array | The header and footer sections of a site |
+
+<h3>Example</h3>
+`public/data/layout.json`
+```
+{
+  "layout": {
+    "sections": [
+      {
+        "slug": "header-1",
+        "template": {
+          "slug": "header-1"
+        },
+        "collections": {
+          "primary-menu-items": {
+            "slug": "primary-menu-items"
+          }
+        }
+      },
+      {
+        "slug": "footer-1",
+        "template": {
+          "slug": "footer-1"
+        },
+        "collections": {
+          "primary-menu-items": {
+            "slug": "primary-menu-items"
+          },
+          "social-link": {
+            "slug": "social-links"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/articles.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/articles.json</a>
+
+<h2 id="sections">Global</h2>
+
+Global data is available to every page in the site. You can define the Global field names yourself.
+
+<h3>Example</h3>
+`public/data/global.json`
+```
+{
+  "global": {
+    "name": "Corporate Tailwind",
+    "logo": {
+      "data": {
+        "attributes": {
+          "name": "builtjs",
+          "path": "/images",
+          "ext": "svg",
+          "url": "/images/builtjs.svg",
+          "width": 45,
+          "height": 45
+        }
+      }
+    }
+  }
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/global.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/global.json</a>
+
+In the backend CMS, Global data is represented as a Strapi Content Type. This is example configuration data for the CMS:
+
+<h3>Example</h3>
+`public/data/strapi/global.json`
+```
+{
+  "global": {
+    "settings": {
+      "kind": "singleType",
+      "collectionName": "global",
+      "info": {
+        "singularName": "global",
+        "pluralName": "globals",
+        "displayName": "Global",
+        "description": "Global data for app."
+      },
+      "options": {
+        "increments": true,
+        "timestamps": true,
+        "draftAndPublish": true
+      },
+      "attributes": {
+        "name": {
+          "default": "Corporate Tailwind",
+          "type": "string"
+        },
+        "logo": {
+          "allowedTypes": [
+            "images"
+          ],
+          "type": "media",
+          "multiple": false
+        }
+      }
+    }
+  }
+}
+
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/strapi/sections.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/data/strapi/sections.json</a>
+
+<h2 id="app">App</h2>
+App data describes the theme.
+
+<h3>App Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `version` | String | Version of Theme |
+| `apiVersion` | String | Built.JS version that Theme conforms to |
+| `displayName` | String | Name of Theme |
+| `description` | String | Description of Theme |
+| `imageUrl` | String | Image to represent Theme |
+| `repoName` | String | Name of git repository |
+| `gitProvider` | String | Git provider (possible values: "github") |
+| `repoUrl` | String | Web address of Theme git repository |
+| `demoUrl` | String | Web address of demo website |
+| `modules` | Array | Modules included in theme |
+
+<h3>Example</h3>
+`public/data/app.json`
+```
+{
+    "app": {
+      "version": 1.0,
+      "apiVersion": 1.1,
+      "displayName": "Corporate Tailwind",
+      "description": "Small business theme with basic Tailwind styling.",
+      "imageUrl": "https://raw.githubusercontent.com/builtjs/builtjs-theme-corporate-tailwind/main/images/main-landing-md.jpg",
+      "repoName": "builtjs/builtjs-theme-corporate-tailwind",
+      "gitProvider": "github",
+      "repoUrl": "https://github.com/builtjs/builtjs-theme-corporate-tailwind",
+      "demoUrl": "https://builtjs-site-ta.vercel.app",
+      "modules": [
+        {
+          "slug": "main"
+        },
+        {
+          "slug": "services"
+        },
+        {
+          "slug": "blog"
+        },
+        {
+          "slug": "features"
+        },
+        {
+          "slug": "Benefits"
+        },
+        {
+          "slug": "about"
+        },
+        {
+          "slug": "contact"
+        }
+      ]
+    }
+  }
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/app.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/app.json</a>
+
+<h2 id="content-types">Content Types</h2>
+A Content Type consists of a set of attributes and other information.
+
+<h3>Content Type Data Model</h3>
+
+| Field | Type | Description |
+| ---- | ---- | ----------- |
+| `slug` | String | Lower case name with dashes |
+| `singularDisplayName` | String | Singular name of Content Type |
+| `pluralDisplayName` | String | Plural name of Content Type |
+| `modelSettings` | String | Strapi configuration object |
+
+<h3>Example</h3>
+`public/data/strapi/content-types.json`
+```
+{
+  "contentTypes": [
+    {
+      "slug": "blog-item",
+      "singularDisplayName": "Blog Item",
+      "pluralDisplayName": "Blog Items",
+      "modelSettings": {
+        "kind": "collectionType",
+        "collectionName": "blog_items",
+        "info": {
+          "displayName": "Blog Items",
+          "singularName": "blog-item",
+          "pluralName": "blog-items",
+          "description": ""
+        },
+        "options": {
+          "increments": true,
+          "timestamps": true,
+          "draftAndPublish": true
+        },
+        "attributes": {
+          "title": {
+            "type": "string",
+            "required": true
+          },
+          "slug": {
+            "type": "uid",
+            "targetField": "title",
+            "required": true
+          },
+          "content": {
+            "type": "richtext"
+          },
+          "blurb": {
+            "type": "text"
+          },
+          "image": {
+            "allowedTypes": [
+              "images"
+            ],
+            "type": "media",
+            "multiple": false,
+            "required": false
+          },
+          "date": {
+            "type": "date",
+            "required": true
+          },
+          "author": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::author.author",
+            "inversedBy": "blogItems"
+          }
+        }
+      }
+    }
+  }
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/strapi/content-types.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/data/strapi/content-types.json</a>
+
+<h2 id="collections">Collections</h2>
+Collections represent anything defined as a Content Type in a Theme.
+
+<h3>Example</h3>
+`public/data/collections/authors.json`
+```
+{
+  "items": [
+    {
+      "id": 1,
+      "attributes": {
+        "slug": "bob-brown",
+        "fullName": "Bob Brown",
+        "bio": "Consectetur adipiscing elit. Integer placerat scelerisque leo, ac tincidunt ex feugiat vel. Nunc volutpat ex libero, vel imperdiet urna facilisis a. Nullam ac magna quis nunc tempor maximus eget at ligula.",
+        "position": "Writer",
+        "profileImage": {
+          "data": {
+            "attributes": {
+              "name": "image",
+              "path": "/images",
+              "ext": "png",
+              "url": "/images/image.png",
+              "width": 48,
+              "height": 48
+            }
+          }
+        }
+      },
+      "status": "published"
+    }
+  ]
+}
+```
+<a href="https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/collections/authors.json">https://github.com/builtjs/builtjs-theme-corporate-tailwind/blob/main/public/data/collections/authors.json</a>
