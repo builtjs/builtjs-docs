@@ -1,6 +1,7 @@
 export default {
   repository: 'https://github.com/builtjs/builtjs-docs',
-  titleSuffix: ' | Docs - Documentation for the Built.JS Javascript theme building platform',
+  titleSuffix:
+    ' | Docs - Documentation for the Built.JS Javascript theme building platform',
   logo: (
     <>
       <div className="flex items-center">
@@ -122,6 +123,21 @@ export default {
         type="image/png"
         sizes="16x16"
         href="/images/favicon-16x16.png"
+      />
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS});
+          `,
+        }}
       />
       {/* <link rel="manifest" href="/site.webmanifest" /> */}
       {/* <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png"/>
