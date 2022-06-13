@@ -71,18 +71,16 @@ export async function getStaticProps() {
 In ```public/data/pages.json```, paste the following:
 ```
 {
-  "pages": {
-    "site": [
-      {
-        "slug": "home",
-        "singularName": "home",
-        "pluralName": "homes",
-        "displayName": "Home",
-        "status": "published",
-        "sections": []
-      }        
-    ]
-  }
+  "pages": [
+    {
+      "slug": "home",
+      "singularName": "home",
+      "pluralName": "homes",
+      "displayName": "Home",
+      "status": "published",
+      "sections": []
+    }        
+  ]
 }
 ```
 <h2 id="step-2-create-a-section-and-template">Step 2: Create a section and template</h2>
@@ -260,21 +258,19 @@ In ```public/data/sections.json```, make the following change:
 In ```public/data/pages.json```, make the following change:
 ```
 {
-  "pages": {
-    "site": [
-      {
-        ...
-        "sections": [
-          {
-            "slug": "main-landing",
-            "template": {
-              "slug": "cover-1"
-            }
+  "pages": [{
+    {
+      ...
+      "sections": [
+        {
+          "slug": "main-landing",
+          "template": {
+            "slug": "cover-1"
           }
-        ]
-      }        
-    ]
-  }
+        }
+      ]
+    }        
+  }]
 }
 ```
 ### Create page-section data

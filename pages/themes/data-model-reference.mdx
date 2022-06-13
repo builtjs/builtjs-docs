@@ -9,6 +9,7 @@ Every Built.js Theme consists of architecture, content model, and metadata compo
 - <a href="#modules">Modules</a>
 - <a href="#pages">Pages</a>
 - <a href="#sections">Sections</a>
+- <a href="#pagesections">PageSections</a>
 - <a href="#templates">Templates</a>
 - <a href="#elements">Elements</a>
 - <a href="#layout">Layout</a>
@@ -20,7 +21,7 @@ Every Built.js Theme consists of architecture, content model, and metadata compo
 - <a href="#app">App</a>
 - <a href="#global">Global</a>
 
-If you haven't already, you can read more about Built.JS Themes [here](/what-is-a-theme).
+If you haven't already, you can read more about Built.JS Themes [here](/themes/what-is-a-theme).
 
 <h2 id="modules">Modules</h2>
 
@@ -56,7 +57,7 @@ A Module is represents a business use case, like "Make Contact" but is usually n
 
 <h2 id="pages">Pages</h2>
 
-A Page is a reference to a page in the site. 
+A Page is a reference to a web page in the site. 
 
 <h3>Page Data Model</h3>
 
@@ -72,28 +73,26 @@ A Page is a reference to a page in the site.
 `public/data/pages.json`
 ```
 {
-  "pages": {
-    "site": [
-        "slug": "home",
-        "singularName": "home",
-        "pluralName": "homes",
-        "displayName": "Home",
-        "demoSections": [
-          {
-            "slug": "home-seo"
-          },
-          {
-            "slug": "main-landing"
-          },
-          {
-            "slug": "benefits-list"
-          },
-          {
-            "slug": "home-about-teaser"
-          }
-        ]
+  "pages": [{
+    "slug": "home",
+    "singularName": "home",
+    "pluralName": "homes",
+    "displayName": "Home",
+    "demoSections": [
+      {
+        "slug": "home-seo"
+      },
+      {
+        "slug": "main-landing"
+      },
+      {
+        "slug": "benefits-list"
+      },
+      {
+        "slug": "home-about-teaser"
       }
     ]
+  }]
 }
 
 ```
