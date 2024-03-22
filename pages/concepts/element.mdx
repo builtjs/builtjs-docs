@@ -1,0 +1,106 @@
+import { Steps } from 'nextra/components'
+
+# Element
+
+An Element represents a reusable UI component. Some examples are:
+- Button
+- Link
+- Card
+
+In a theme or plugin Next.js project, there are 4 things you need to do to create an element: 
+ 
+<Steps>
+### Create a React component
+ 
+This is done in the ```components/elements``` directory.
+ 
+### Configure element data 
+ 
+This will make the element data configurable in the end site's Sanity CMS. Configure this in ```public/data/content-types/elements```.
+
+### Configure a section to use the element 
+
+Do this in ```public/data/sections.json```.
+
+### Use the React element in your section template code
+
+The component is ready to use in your code and data will be available for it to use.
+
+</Steps>
+
+Here's an example of a button element:
+
+```tsx filename="components/elements/button.tsx" copy
+export default function Button({ data }:any) {
+  if (!data) return <></>;
+  return (
+    <div id="form-button" className={`btn btn-${data.type} w-full`}>
+      {data.label}
+    </div>
+  );
+}
+```
+
+And the data for it:
+
+```json filename="public/data/content-types/elements.json" copy
+{
+  "elements": [
+    {
+      "name": "button",
+      "category": "elements",
+      "title": "Button",
+      "fields": {
+        "slug": {
+          "type": "uid",
+          "targetField": "label",
+          "required": true
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  ]
+}
+```
+
+Now this element can be used in a template data:
+
+```json filename="public/data/sections.json" copy
+{
+  "sections": [
+    {
+      ...
+      "data": {
+        ...
+        "button": {
+          "label": "Send",
+          "type": "primary"
+        }
+      }
+    }
+  ]
+}
+```
+
+And in the template Next.js component, you can now use the element like this:
+
+```tsx filename="components/templates/forms/form-1/form1.tsx" copy
+import {Button} from "@/components/elements";
+
+export default function Form1({ content }: any) {
+  if (!content) return <></>;
+  let { data = null } = { ...content };
+  return (
+    <section id="form-1" className="template">
+      ...
+      <Button data={data.button}></Button>
+      ...
+    </section>
+  );
+}
+```

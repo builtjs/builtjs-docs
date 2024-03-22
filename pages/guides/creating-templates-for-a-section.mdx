@@ -1,0 +1,90 @@
+import { Steps } from "nextra/components";
+
+# Creating templates for a section
+
+You can easily create a template for section in Built Studio, or you can do so in the code of the exported theme/plugin. The steps for creating a new section template are:
+
+<Steps>
+### Create the template configuration
+ 
+You can do this by creating a new template in Built Studio, or by manually creating a new object in ```public/data/templates.json``` like this:
+
+```json filename="public/data/templates.json" copy
+{
+  "templates": [
+    {
+      "name": "header1",
+      "title": "Header 1",
+      "category": "headers",
+      "description": "Simple header with justified logo and nav links."
+    }
+  ]
+}
+```
+
+### Add the template to a section
+
+Add the template name to the `templates` array and, optionally, as the default template for the section.
+
+```json filename="public/data/sections.json" {7, 8, 9, 10} copy
+{
+  "name": "header",
+  "title": "Header",
+  "category": "layout",
+  "type": "layout",
+  "description": "The header contains the company logo, main site navigation and often a call-to-action button.",
+  "templates": ["header1", "header2"],
+  "defaultTemplate": {
+    "name": "header1"
+  },
+  "position": "start",
+  "collections": {
+    "primaryMenuItem": {}
+  }
+}
+```
+
+### Add images of template UI
+
+Take a screenshot of your template and store the image in a publicly accessible location. Then, add the image url to the template object in `/public/data/templates.json`:
+
+```json filename="public/data/templates.json" {8, 9, 10, 11} copy
+{
+  "templates": [
+    {
+      "name": "header1",
+      "title": "Header 1",
+      "category": "headers",
+      "description": "Simple header with justified logo and nav links.",
+      "images": {
+        "thumb": "https://cdn.jsdelivr.net/gh/richjava/builtjs-theme-corporate/public/images/theme/templates/banners/banner1/banner1.png",
+        "lrg": "https://cdn.jsdelivr.net/gh/richjava/builtjs-theme-corporate/public/images/theme/templates/banners/banner1/banner1.png"
+      }
+    }
+  ]
+}
+```
+
+### Define the Github repository URL and demo URL
+
+Adding these URLs will allow the end user to learn more about the template when viewing it in Built Studio. 
+
+```json filename="public/data/templates.json" {12, 13} copy
+{
+  "templates": [
+    {
+      "name": "header1",
+      "title": "Header 1",
+      "category": "headers",
+      "description": "Simple header with justified logo and nav links.",
+      "images": {
+        "thumb": "https://cdn.jsdelivr.net/gh/richjava/builtjs-theme-corporate/public/images/theme/templates/banners/banner1/banner1.png",
+        "lrg": "https://cdn.jsdelivr.net/gh/richjava/builtjs-theme-corporate/public/images/theme/templates/banners/banner1/banner1.png"
+      },
+      "repoUrl": "https://github.com/richjava/builtjs-theme-corporate/blob/main/components/templates/headers/header1/header1.js",
+      "demoUrl": "https://builtjs-theme-corporate.vercel.app/templates/headers#header1"
+    }
+  ]
+}
+```
+</Steps>

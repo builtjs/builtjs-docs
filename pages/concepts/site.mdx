@@ -1,0 +1,62 @@
+import { Steps } from "nextra/components";
+import { Tabs } from "nextra/components";
+
+# Site
+
+You can create a site from a theme in the Built Studio. When you export the site from the studio, a zip file is downloaded which contains a `config` directory and a `README.md` file.
+The README file contains all the directions to setup and run the project, which will be a Next.js frontend with a Sanity CMS. Data will be stored and managed by Sanity in the cloud.
+
+## Accessing the Sanity Studio
+
+After running the site, you can access the project's Sanity Studio at `/admin`. This is a content management system that includes content for all sections, entries, and global data in the site. Sanity schemas are defined in the project's `sanity/schemas`.
+
+## Next.js pages and components
+
+Components from the theme (and any plugins that the theme uses) are carried through into the site. This is an example of a page in a Built site:
+
+```tsx filename="pages/index.tsx" copy
+import React from "react";
+import { getProps } from "@/lib/api";
+import Error from "next/error";
+import { withRouter } from "next/router";
+import Seo from "@/components/templates/head/seo/seo";
+import Block1 from "@/components/templates/blocks/block1/block1";
+import List1 from "@/components/templates/lists/list1/list1";
+import RichjavaBlogList2 from "@/components/plugins/richjava-blog/templates/lists/list2/list2";
+import Cards1 from "@/components/templates/cards/cards1/cards1";
+import Cover1 from "@/components/templates/covers/cover1/cover1";
+import Layout from "@/components/layout/layout";
+
+const Page = (props: any) => {
+  if (props.error) {
+    return <Error statusCode={props.error.code} />;
+  }
+  return (
+    <>
+      <Seo content={props.homeSeoContent} />
+      <Layout
+        headerContent={props.headerContent}
+        footerContent={props.footerContent}
+      >
+        <Cover1 content={props.mainLandingContent} />
+        <Cards1 content={props.featuresListContent} />
+        <RichjavaBlogList2 content={props.blogTeaserContent} />
+        <List1 content={props.benefitsListContent} />
+        <Block1 content={props.aboutTeaserContent} />
+      </Layout>
+    </>
+  );
+};
+
+export default withRouter(Page);
+
+export async function getStaticProps() {
+  let props = await getProps({ pageName: "home" });
+  return {
+    props: props,
+    revalidate: 10,
+  };
+}
+```
+
+Learn more about how to create a site in [this guide](/guides/how-to-create-a-site).

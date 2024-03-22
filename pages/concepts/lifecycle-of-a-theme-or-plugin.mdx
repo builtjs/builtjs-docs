@@ -1,0 +1,28 @@
+import { Steps } from 'nextra/components'
+
+# Lifecycle of a theme or plugin
+
+Themes and plugins follow the same lifecycle:
+ 
+<Steps>
+### Creation
+ 
+The theme or plugin is created in Built Studio (in the Theme/Plugin Designer) and the modules and other configuration data is set.
+ 
+### Export
+ 
+The theme or plugin is exported as a zip file download. Included is a ```config``` folder and a README file with instructions on how to setup and run the theme/plugin as a Next.js project.
+
+### Development
+
+The React components are developed and the theme/plugin is pushed to your Git repository. This can be a public or private personal repo or one that's in a Github organisation.
+
+### Validation and Import
+
+When the React components have been built, the repo can be imported into Built Studio. If all is well with the theme/plugin configuration, it can be imported and then it can be used to make sites with.
+
+### Deletion
+
+If you don't want the theme/plugin anymore, you can simply delete it. As long as you have the code in your Github repo, you can re-import at any time. If you delete a plugin, it will still live on in theme's that have have been imported, but any future imports that still use the deleted plugin will not include it, so the plugin should be removed from the theme configuration.
+
+</Steps>

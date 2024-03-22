@@ -1,0 +1,17 @@
+{
+  "index": "Introduction",
+  "concepts": "Concepts",
+  "guides": "Guides",
+  "data-model-reference": "Data Model Reference",
+  "error-reference": "Error Reference",
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "https://twitter.com/shuding_",
+    "newWindow": true
+  }
+}

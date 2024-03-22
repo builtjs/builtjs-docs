@@ -1,0 +1,40 @@
+import { FileTree } from "nextra/components";
+
+# Data files
+
+Data files contain JSON data used for configuration of theme or plugin's pages, sections, plugins and more. They are kept in ```public/data```.  
+
+These are the folders and files that you will find in this directory:
+
+<FileTree>
+  <FileTree.Folder name="public" defaultOpen>
+    <FileTree.Folder name="data" defaultOpen>
+    <FileTree.Folder name="collections" defaultOpen>
+      <FileTree.File name="authors.json" />
+    </FileTree.Folder>
+    <FileTree.Folder name="schemas" defaultOpen>
+      <FileTree.File name="content-types.json" />
+      <FileTree.File name="elements.json" />
+      <FileTree.File name="global.json" />
+      <FileTree.File name="sections.json" />
+    </FileTree.Folder>
+      <FileTree.File name="global.json" />
+      <FileTree.File name="layout.json" />
+      <FileTree.File name="module-pages.json" />
+      <FileTree.File name="modules.json" />
+      <FileTree.File name="pages.json" />
+      <FileTree.File name="sections.json" />
+      <FileTree.File name="templates.json" />
+      <FileTree.File name="theme.json" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+## Schema files
+These files are for configuring the fields, or "schema" for Collections, Elements, Global data, and Sections.
+
+## Collection data files
+These are named with the plural name of the content type, like ```authors.json``` and each file contains data for entries in the collection.
+
+## Main data files
+These files contain the main data for the theme/plugin, such as Module data.

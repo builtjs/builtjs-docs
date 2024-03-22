@@ -1,0 +1,19 @@
+import { Callout } from 'nextra/components'
+import { FileTree } from "nextra/components";
+
+# App
+Every theme and plugin needs metadata, such as its name, and you can set this on the App page of the Theme or Plugin Designer in the Built Studio. 
+Once you have exported the theme or plugin, you will see these values in the project's ```theme.json``` or ```plugin.json``` file. 
+ 
+ <FileTree>
+  <FileTree.Folder name="public" defaultOpen>
+    <FileTree.Folder name="data" defaultOpen>
+      <FileTree.File name="..." />
+      <FileTree.File name="theme.json" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+<Callout type="info">
+  Please note that when you're ready to import the theme or plugin into your Built Studio Workspace, you will first need to set the ```version``` property in this file.
+</Callout>

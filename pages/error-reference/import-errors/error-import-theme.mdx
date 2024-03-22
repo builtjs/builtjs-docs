@@ -1,0 +1,24 @@
+import { Cards, Card } from 'nextra/components'
+import { BrainIcon, GuideIcon, DataIcon } from '../../../icons.jsx'
+
+# An error occurred while importing theme
+
+During theme or plugin import, data is created from data files in the theme/plugin's Github repo. There may be an issue with a data file.
+
+Please check the data files located at:
+
+<FileTree>
+  <FileTree.Folder name="public" defaultOpen>
+    <FileTree.Folder name="data" defaultOpen>
+      <FileTree.File name="..." />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+The data model reference is located at [/data-model-reference](/data-model-reference).
+
+<Cards>
+  <Card icon={<BrainIcon/>} title="Concepts" href="/concepts/concepts-overview" />
+  <Card icon={<GuideIcon/>} title="Guides" href="/guides/guides-overview" />
+  <Card icon={<DataIcon/>} title="Data Model Reference" href="/data-model-reference" />
+</Cards>

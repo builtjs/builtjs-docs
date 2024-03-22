@@ -1,0 +1,26 @@
+import { Steps } from 'nextra/components'
+
+# How to create a plugin
+
+Creating a theme is almost identical to [creating a theme](/guides/how-to-create-a-theme). It's easy to create a reusable plugin using Built Studio and your custom designed React components.
+
+<Steps>
+### Create and configure a plugin in Built Studio 
+ 
+Use the Plugin Designer to define all the pages, sections, collections and other items for your plugin.
+ 
+### Export the and set up the plugin
+ 
+Download and extract the theme zip file and follow the instructions in the README to create a Next.js project and set the configurations.
+
+### Create your plugin's templates (React components)
+
+Go to the project's ```components/templates``` directory and design each template. The section data you defined (when creating the plugin in Built Studio) will be available to use in the template.
+
+### Import the plugin into Built Studio
+
+Push the project to Github and then go to your Built Studio workspace and import it. The studio will first validate the plugin to make sure it meets the basic requirements.
+
+</Steps>
+
+Learn more about a plugin's [lifecycle](/concepts/lifecycle-of-a-theme-or-plugin).

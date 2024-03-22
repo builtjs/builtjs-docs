@@ -1,0 +1,100 @@
+# Page
+
+A Page represents a web page. You may expect a Page to have sections, but Built themes and plugin pages do not. Instead, it's a ModulePage which specifies which sections belong to a page. This way, pages and sections can be wrapped up in a module so the end user of the theme can choose to include the pages and sections by simply adding a module.
+
+Although a Page doesn't specify sections it does define its "demo sections". These are sections that will display on the web page during development. 
+After you've exported the theme/plugin from Built Studio, you can find the page configuration in ```public/data/pages.json```. This is an example of a page:
+
+```json filename="public/data/pages.json" copy
+{
+  "pages": [
+    {
+      "name": "home",
+      "title": "Home",
+      "demoSections": [
+        {
+          "name": "homeSeo"
+        },
+        {
+          "name": "mainLanding"
+        },
+        {
+          "name": "benefitsList"
+        },
+        {
+          "name": "featuresList"
+        },
+        {
+          "name": "contactTeaser"
+        }
+      ]
+    },
+    ...
+  ]
+}
+```
+
+In order to specify which sections belong on a page, you need to create module pages. For example, the following would be the module pages that would create a home page with the same sections as in the code above (if all modules the module pages belong to are select):
+
+```json filename="public/data/module-pages.json" copy
+{
+  "modulePages": [
+    {
+      "name": "homeBase",
+      "description": "Home page base sections",
+      "page": {
+        "name": "home"
+      },
+      "sections": [
+        {
+          "name": "homeSeo",
+          "position": 0
+        },
+        {
+          "name": "mainLanding",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "name": "homeFeatures",
+      "description": "Features list on Home page",
+      "page": {
+        "name": "home"
+      },
+      "sections": [
+        {
+          "name": "featuresList",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "name": "homeBenefits",
+      "description": "Benefits list on Home page",
+      "page": {
+        "name": "home"
+      },
+      "sections": [
+        {
+          "name": "benefitsList",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "name": "homeAboutTeaser",
+      "description": "About page teaser on Home page",
+      "page": {
+        "name": "home"
+      },
+      "sections": [
+        {
+          "name": "aboutTeaser",
+          "position": 6
+        }
+      ]
+    }
+  ]
+}
+```

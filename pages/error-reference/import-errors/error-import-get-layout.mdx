@@ -1,0 +1,36 @@
+import { Cards, Card } from 'nextra/components'
+import { BrainIcon, GuideIcon, DataIcon } from '../../../icons.jsx'
+
+# An error occurred while getting layout for import
+
+During theme or plugin import, layout data is created from data files in the theme/plugin's Github repo. There may be an issue with the data file.
+
+Please check the data file for layout data located at:
+
+<FileTree>
+  <FileTree.Folder name="public" defaultOpen>
+    <FileTree.Folder name="data" defaultOpen>
+      <FileTree.File name="..." />
+      <FileTree.File name="layout.json" />
+      <FileTree.File name="..." />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+The data model reference for layout is located at [/data-model-reference/#layout](/data-model-reference/#layout).
+
+To learn more, please refer to the [Layout](/concepts/layout) page of the [Concepts](/concepts) documentation.
+
+<Cards>
+  <Card
+    icon={<BrainIcon />}
+    title="Concepts"
+    href="/concepts/concepts-overview"
+  />
+  <Card icon={<GuideIcon />} title="Guides" href="/guides/guides-overview" />
+  <Card
+    icon={<DataIcon />}
+    title="Data Model Reference"
+    href="/data-model-reference"
+  />
+</Cards>

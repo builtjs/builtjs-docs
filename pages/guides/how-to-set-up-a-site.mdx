@@ -1,0 +1,71 @@
+import { Steps } from "nextra/components";
+import { Tabs } from "nextra/components";
+
+# How to set up a site
+
+## Site setup process
+
+The following process outlines how to set up a site after site export from Built Studio.
+
+<Steps>
+### Create a Sanity project and set the environment variables
+<Tabs items={['npm','pnpm']}>
+  <Tabs.Tab>```npm create sanity@latest -- --template clean --create-project "Corporate site" --dataset production --bare```</Tabs.Tab>
+  <Tabs.Tab>```pnpm create sanity@latest -- --template clean --create-project "Corporate site" --dataset production --bare```</Tabs.Tab>
+</Tabs>
+
+Go to the [Sanity project management dashboard](https://www.sanity.io/manage) and:
+1. Create an API token
+2. Set the CORS origin(s)
+
+Paste your sanity project ID and API token in the `.env` file in `/config/frontend`:
+
+```.env filename="/config/frontend/.env" copy
+# Required, find them on https://manage.sanity.io
+NEXT_PUBLIC_SANITY_PROJECT_ID=""
+NEXT_PUBLIC_SANITY_DATASET="production"
+NEXT_PUBLIC_SANITY_WRITE_TOKEN=""
+# see https://www.sanity.io/docs/api-versioning for how versioning works
+NEXT_PUBLIC_SANITY_API_VERSION="2022-11-15"
+```
+
+### Create a fresh Next.js project
+
+<Tabs items={["npm", "pnpm"]}>
+  <Tabs.Tab>
+    ```pnpx create-next-app@latest corporate-site --ts --no-app --src-dir```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```pnpx create-next-app@latest corporate-site --ts --no-app --src-dir```
+  </Tabs.Tab>
+</Tabs>
+
+### Install the configured pages, sections and other data.
+
+<Tabs items={["npm", "pnpm"]}>
+  <Tabs.Tab>```npx create-built-app init```</Tabs.Tab>
+  <Tabs.Tab>```pnpx create-built-app init```</Tabs.Tab>
+</Tabs>
+
+### Install the npm project dependencies
+
+<Tabs items={["npm", "pnpm"]}>
+  <Tabs.Tab>```npm install```</Tabs.Tab>
+  <Tabs.Tab>```pnpm install```</Tabs.Tab>
+</Tabs>
+
+### Import the seed data into Sanity
+
+<Tabs items={["npm", "pnpm"]}>
+  <Tabs.Tab>```npm run setup```</Tabs.Tab>
+  <Tabs.Tab>```pnpm run setup```</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+After you've done this, you can run the site and access Sanity Studio.
+
+<Tabs items={["npm", "pnpm"]}>
+  <Tabs.Tab>``` npm run dev ```</Tabs.Tab>
+  <Tabs.Tab>``` pnpm run dev ```</Tabs.Tab>
+</Tabs>

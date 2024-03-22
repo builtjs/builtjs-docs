@@ -1,0 +1,96 @@
+# Plugin
+
+Plugins can add new functionality or extend existing functionality for your site. A plugin can be included in a theme as a module. It includes all the pages, sections, content types and other data and functionality to fulfil a use case. For example, a "blog" plugin could be included in a theme, and this would allow a user to view a page that has a list of blog entries, a blog article page, and more.
+A Built.js plugin, from a technical point of view, a plugin is very similar to a theme in the following ways:
+- It is a Next.js project
+- It is accessed by the Built.js Studio through its Github repository
+
+It differs from a theme because:
+- It only has one module (but, like a theme's main modules, this module can have submodules)
+- It has a namespace
+
+## Plugin namespace
+A plugin needs a namespace (which is a short string) so that it doesn't have naming conflicts with the hosting theme and other plugins used in the theme. A namespace follows this naming convention: ```[github_user]-[github-repo-name]```
+
+This namespace will be used in the plugin project in the path of:
+- components
+- api routes
+So instead of components being located at ```components/templates``` they should be made available at ```components/plugins/[plugin-name]/templates```. Similarly, api routes should be at ```pages/api/plugins/[api-name]```.
+For example, in the "richjava-blog" plugin, for a React component that is located at ```components/plugins/richjava-blog/templates/lists/list2/list2.tsx```, when the end user of the theme exports it, the "List2" component is built into the home page of the site as ```RichjavaBlogList2```, like this:
+
+```tsx filename="pages/index.tsx" copy
+import React from "react";
+import { getProps } from "@/lib/api";
+import Error from "next/error";
+import { withRouter } from "next/router";
+import Seo from "@/components/templates/head/seo/seo";
+import Block1 from "@/components/templates/blocks/block1/block1";
+import List1 from "@/components/templates/lists/list1/list1";
+import RichjavaBlogList2 from "@/components/plugins/richjava-blog/templates/lists/list2/list2";
+import Cards1 from "@/components/templates/cards/cards1/cards1";
+import Cover1 from "@/components/templates/covers/cover1/cover1";
+import Layout from "@/components/layout/layout";
+import PageProps from '../types/PageProps';
+
+const Page = (props: PageProps) => {
+  if (props.error) {
+    return <Error statusCode={props.error.code} />;
+  }
+  return (
+    <>
+      <Seo content={props.homeSeoContent} />
+      <Layout
+        headerContent={props.headerContent}
+        footerContent={props.footerContent}
+      >
+        <Cover1 content={props.mainLandingContent} />
+        <Cards1 content={props.featuresListContent} />
+        <RichjavaBlogList2 content={props.blogTeaserContent} />
+        <List1 content={props.benefitsListContent} />
+        <Block1 content={props.aboutTeaserContent} />
+      </Layout>
+    </>
+  );
+};
+
+export default withRouter(Page);
+
+export async function getStaticProps() {
+  let props = await getProps({ pageName: "home" });
+  return {
+    props: props,
+    revalidate: 10,
+  };
+}
+```
+
+## Developing a plugin
+A plugin is built in isolation from a theme. When ready, you can import the plugin into the Built.js Studio. 
+
+Once you have imported the plugin, you can include it in a new or existing theme.
+Adding your plugin to a new theme
+If you are creating a theme through the Theme Designer in the  Built.js Studio, after you have imported your theme into the studio, you will be able to find it in the Theme Designer under "Plugins". From there you can can select your plugin to add it to your theme.
+
+Adding your plugin to an existing theme
+To add a plugin to a theme that you already have in the Built.js Studio, you can add it to the project's ```modules.json``` file, specifying the blog's name, repoName, and version, like this:
+
+```json filename="modules.json" copy
+{
+  "modules": [
+    ...
+    {
+      "name": "blog",
+      "repoName": "richjava/builtjs-plugin-blog",
+      "version": "1.0.0"
+    }
+    ...
+  ]
+}
+```
+
+
+
+
+
+
+

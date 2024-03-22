@@ -1,0 +1,50 @@
+import { Cards, Card } from "nextra/components";
+import { BrainIcon, GuideIcon, DataIcon } from "../../../icons.jsx";
+
+# An error occurred while creating global for import
+
+During theme or plugin import, global data is created from data files in the theme/plugin's Github repo. There may be an issue with the data file.
+
+Please check the schema data file for global data located at:
+
+<FileTree>
+  <FileTree.Folder name="public" defaultOpen>
+    <FileTree.Folder name="data" defaultOpen>
+      <FileTree.Folder name="schemas" defaultOpen>
+        <FileTree.File name="..." />
+        <FileTree.File name="global.json" />
+        <FileTree.File name="..." />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+And the data file for global data:
+
+<FileTree>
+  <FileTree.Folder name="public" defaultOpen>
+    <FileTree.Folder name="data" defaultOpen>
+      <FileTree.File name="..." />
+      <FileTree.File name="global.json" />
+      <FileTree.File name="..." />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+The data model reference for elements is located at [/data-model-reference/#global](/data-model-reference/#global).
+
+To learn more, please refer to the [Global](/concepts/global) page of the [Concepts](/concepts) documentation.
+
+<Cards>
+  <Card
+    icon={<BrainIcon />}
+    title="Concepts"
+    href="/concepts/concepts-overview"
+  />
+  <Card icon={<GuideIcon />} title="Guides" href="/guides/guides-overview" />
+  <Card
+    icon={<DataIcon />}
+    title="Data Model Reference"
+    href="/data-model-reference"
+  />
+</Cards>

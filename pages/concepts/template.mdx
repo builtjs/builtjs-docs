@@ -1,0 +1,72 @@
+# Template
+
+A Template represents the user interface of a section. A section can (and should) have more than one template so that the user of the them can choose from are variation of UI alternatives when configuring the section in Built Studio. The data for a template comes from the section it belongs to.
+
+In a theme or plugin Next.js project, templates are configured in 4 locations: 
+Create React components under the ```components/templates``` directory
+Configure the template data in ```public/data/templates.json```
+Configure a section to use the template in ```public/data/sections.json```
+Add the React element component to a React template component from ```components/templates```
+Here's an example of a template for a page landing section:
+
+```tsx filename="components/templates/covers/cover1/cover1.tsx" copy
+...
+
+export default function Cover1({ content }: any) {
+  if (!content) return <></>;
+  let { data } = { ...content };
+
+  return (
+    <section>
+      ...
+      <h1>{data.heading}</h1>
+      ...
+    </section>
+  );
+}
+```
+
+And the configuration for it (and other cover templates) in the sections data file:
+
+```json filename="public/data/sections.json" copy
+{
+  "sections": [
+    {
+      "name": "mainLanding",
+      ...
+      "templates": ["cover1", "cover2", "cover3", "cover4", "cover5"],
+      "defaultTemplate": {
+        "name": "cover1"
+      },
+      ...
+    }
+  ]
+}
+```
+
+In the tempates data file, the configuration looks like this:
+
+```json filename="public/data/templates.json" copy
+{
+  "templates": [
+    {
+      "name": "cover1",
+      "title": "Cover 1",
+      "category": "covers",
+      "description": "Full viewport cover with text content and a supporting image.",
+      "images": {
+        "thumb": "https://cdn.jsdelivr.net/gh/richjava/builtjs-theme-corporate/public/images/theme/templates/covers/cover1/cover1.png",
+        "lrg": "https://cdn.jsdelivr.net/gh/richjava/builtjs-theme-corporate/public/images/theme/templates/covers/cover1/cover1.png"
+      },
+      "repoUrl": "https://github.com/richjava/builtjs-theme-corporate/blob/main/components/templates/covers/cover-1/cover1.js",
+      "demoUrl": "https://builtjs-theme-corporate.vercel.app/templates/covers#cover1"
+    },
+  ]
+}
+```
+
+The name, title and category properties are required. 
+
+All templates are kept in categories, like "covers", "banners", etc. This category property corresponds to the directory structure in the ```public/data/templates``` directory, so the "cover1" template file above would be located at: ```public/data/templates/covers/cover1```
+
+The other properties are important to include before importing the theme or plugin into the Built Studio to improve end user experience. The "thumb" and "lrg" images are used by Built Studio to display the what the template looks like to the user. They are screenshots of the page section that uses the template. If not images are provided, a placeholder image will be used instead.

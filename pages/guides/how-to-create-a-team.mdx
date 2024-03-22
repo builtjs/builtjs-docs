@@ -1,0 +1,39 @@
+import { Callout } from 'nextra/components'
+import { Steps } from "nextra/components";
+
+# How to create a team workspace
+
+The Workspace page in the Built Studio is where you can manage your themes and plugins. Your Workspace has 2 spaces: Personal and Team spaces. 
+You can use the Built Workspace to:
+- Browse your own themes and plugins
+- Create a site from your theme
+- Import a new theme or plugin from Github repo
+- Update your existing theme or plugin to use the latest Github repo code
+- Create a new branch in the studio from a Github branch
+- Create a new theme or plugin through through the Theme/Plugin Designer interface
+- Create a new Team space to manage you Github organization's theme/plugin projects
+
+There are 2 spaces that you can keep your themes and plugins under in your studio workspace:
+- Personal space
+- Team spaces
+The personal space uses the projects that are imported from your personal Github account and a Team space uses projects that are imported from a Github organisation.
+
+<Callout type="info">
+  Please note that the purpose of a team workspace is to allow you to manage your Github organisation themes and plugins, and is currently only available to individual users.
+</Callout>
+
+To create a team workspace in Built Studio:
+
+<Steps>
+### Select your organization
+ 
+In your workspace, click on "Create Team". You can then choose the Github organisation you'd like to import themes and plugins from. 
+ 
+### Grant access to Built.js
+ 
+If you haven't already approved third-party access for Built.js, you'll need to go to your [Github settings](https://github.com/settings/connections/applications/0c9625648f60531a4b00) and click the "Grant" button for your organization.
+
+### Remove restrictions
+
+Follow the link which will take you to the Github organization's third-party application access policy page where you can click on the "Remove restrictions" button.
+</Steps>
