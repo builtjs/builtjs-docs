@@ -2,16 +2,16 @@ import { FileTree } from "nextra/components";
 
 # Schema
 
-A schema defines the fields. In a Built.js theme or plugin, schemas apply to the following:
+In a Built.js theme or plugin, a schema defines the fields used in:
 
-- [content types](/concepts/content-type)
-- [elements](/concepts/element)
-- [global](/concepts/global)
-- [sections](/concepts/section)
+- [Content Types](/concepts/content-type)
+- [Elements](/concepts/element)
+- [Global](/concepts/global)
+- [Sections](/concepts/section)
 
 This means that you can select the fields you want for any of these and when the site is built, it will come with a Sanity CMS which includes the fields you defined.
-The easiest way to configure schemas is through the Theme/Plugin Design in the Built Studio.
-A content type can have the following fields:
+The easiest way to configure schemas is through the Theme/Plugin Design in the [Built Studio](/built-studio).
+A content type can have the following data types:
 
 - `biginteger`
 - `boolean`
@@ -35,15 +35,19 @@ Element, global, and section content types can also have the above-mentioned fie
 - `relation`, because a relation field defines the relationship (e.g. "one to many") between content types only.
 - `uid`, because this is used for slugs of content types only.
 
+Find out more about [data types](/concepts/data-types-common).
+
 When you export your theme or plugin from the studio, a `schemas` directory will be created in the `public/data` directory with the following JSON files:
 
 <FileTree>
   <FileTree.Folder name="public" defaultOpen>
     <FileTree.Folder name="data" defaultOpen>
-      <FileTree.File name="content-types.json" />
-      <FileTree.File name="elements.json" />
-      <FileTree.File name="global.json" />
-      <FileTree.File name="sections.json" />
+      <FileTree.Folder name="schemas" defaultOpen>
+        <FileTree.File name="content-types.json" />
+        <FileTree.File name="elements.json" />
+        <FileTree.File name="global.json" />
+        <FileTree.File name="sections.json" />
+      </FileTree.Folder>
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>

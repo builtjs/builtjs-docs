@@ -1,0 +1,115 @@
+import { Tabs } from "nextra/components";
+
+# Colors
+Yhe primary, secondary, and accent color values defined in a theme will be applied to any plugins that the theme uses. For this reason, themes and plugins should use the same basic conventions for these colors, as outlined below:
+
+## Primary, secondary and accent colors
+### Primary Colors
+Primary colors are foundational to the brand identity and are typically derived from the brand's logo or primary visual elements. They establish the brand's presence and are used for prominent UI elements such as headers, primary buttons, and important call-to-action elements.
+
+#### Primary color design token
+| Token              | Example Value |
+| ------------------ | ------------- |
+| `color-primary`    | #e5e7eb       |
+
+### Secondary Colors
+Secondary colors complement primary colors and provide additional depth and variety to the color palette. They support the brand identity and contribute to visual hierarchy and balance within the interface.
+
+#### Secondary color design token
+| Token              | Example Value |
+| ------------------ | ------------- |
+| `color-secondary`  | #f3f4f6       |
+
+### Accent Colors (generally used for calls-to-action)
+Accent colors are specifically chosen for their ability to stand out and draw attention. They are highly saturated or brighter than other colors in the palette, making them ideal for highlighting important elements and encouraging user interaction. Accent colors serve as the designated choice for CTAs within the design system. Their distinctiveness and attention-grabbing nature make them the most suitable option for prompting user actions and guiding user focus towards key interactions.
+
+#### Accent color design token
+| Token           | Example Value |
+| --------------- | ------------- |
+| `color-accent`  | #6b7280       |
+
+### Dark Colors
+| Token            | Example Value |
+| ---------------- | ------------- |
+| `color-dark-01`  | #4b5563       |
+| `color-dark-02`  | #374151       |
+| `color-dark-03`  | #1f2937       |
+| `color-dark-04`  | #111827       |
+
+### Light Colors
+| Token            | Example Value |
+| ---------------- | ------------- |
+| `color-light-01` | #9ca3af       |
+| `color-light-02` | #d1d5db       |
+| `color-light-03` | #e5e7eb       |
+| `color-light-04` | #f3f4f6       |
+
+### CSS implementation for primary, secondary, and accent colors
+
+```css filename="styles/globals.css" copy {3,6,9,10,11}
+:root {
+  /* Define primary color - change to your value */
+  --color-primary: #fff; 
+
+  /* Define secondary color - change to your value  */
+  --color-secondary: #f3f4f6; 
+
+  /* Define accent color hue, saturation and lightness (hsl) - change to use your values */
+  --hue-accent: 1;
+  --saturation-accent: 1%;
+  --lightness-accent: 10%;
+
+  /* Define accent color */
+  --color-accent: hsl(var(--hue-accent),var(--saturation-accent),var(--lightness-accent)); 
+    
+  /* Increase lightness by 10% */
+  --color-accent-hover: hsl(
+    var(--hue-accent),
+    var(--saturation-accent),
+    calc(var(--lightness-accent) + 10%)
+  );
+
+  /* Active state decreases lightness by 10% */
+  --color-accent-active: hsl(
+    var(--hue-accent),
+    var(--saturation-accent),
+    calc(var(--lightness-accent) - 10%)
+  );
+
+  /* Disabled state increases lightness by 30% */
+  --color-accent-disabled: hsl(
+    var(--hue-accent),
+    var(--saturation-accent),
+    calc(var(--lightness-accent) + 30%)
+  );
+}
+```
+
+## Tailwind configuration
+```js filename="tailwind.config.js" copy {3,4,5,6,7,8,9,10,11,12,13}
+module.exports = {
+  theme: {
+    colors: {
+      ...colors,
+      ...{
+        "primary": "var(--color-primary)",
+        "primary-inverse": "var(--color-primary)",
+        "secondary": "var(--color-secondary)",
+        "accent": "var(--color-accent)",
+        "accent-hover": "var(--color-accent-hover)",
+        "accent-active": "var(--color-accent-active)",
+        "accent-disabled": "var(--color-accent-disabled)"
+      },
+    },
+  },
+  //...
+};
+
+```
+
+With this configration, themes and plugins can follow the same simple methodology for managing colors. An example of this can be seen in the following implementation of a button style which can be used in a theme and any plugin that the theme uses:
+```
+.btn-primary {
+  @apply text-white bg-accent btn hover:bg-accent-hover;
+}
+```

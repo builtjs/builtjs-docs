@@ -16,7 +16,7 @@ This is done in the ```components/elements``` directory.
  
 ### Configure element data 
  
-This will make the element data configurable in the end site's Sanity CMS. Configure this in ```public/data/content-types/elements```.
+This will make the element data configurable in the end site's Sanity CMS. Configure this in ```public/data/schemas/elements```.
 
 ### Configure a section to use the element 
 
@@ -43,12 +43,11 @@ export default function Button({ data }:any) {
 
 And the data for it:
 
-```json filename="public/data/content-types/elements.json" copy
+```json filename="public/data/schemas/elements.json" copy
 {
   "elements": [
     {
       "name": "button",
-      "category": "elements",
       "title": "Button",
       "fields": {
         "slug": {

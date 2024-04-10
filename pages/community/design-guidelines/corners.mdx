@@ -1,0 +1,28 @@
+# Corners
+
+| Token          | Example Value |
+| -------------- | ------------- |
+| `corner-01`    | 2px           |
+| `corner-02`    | 4px           |
+| `corner-03`    | 12px          |
+| `corner-04`    | 16px          |
+
+## Tailwind configuration
+```js filename="tailwind.config.js" copy {6,7,8,9,10,11}
+module.exports = {
+  theme: {
+    // ...
+    extend: {
+      borderRadius: {
+        "corner-01": "0.125rem", // 2px
+        "corner-02": "0.25rem", // 4px
+        "corner-03": "0.5rem", // 8px
+        "corner-04": "0.75rem", //12px
+        "corner-05": "1rem", // 16px
+      }
+    },
+  },
+  //...
+};
+
+```

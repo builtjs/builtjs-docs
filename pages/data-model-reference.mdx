@@ -3,10 +3,10 @@ The Built.js data model is represented in a theme or plugin project by JSON [dat
 
 ## Schema files
 These files, located in ```public/data/schemas```, define the schemas that will be used to create [Sanity](https://sanity.io) schemas when the site is built.
-- [Content Type schemas](#content-type-schemas)
-- [Element schemas](#element-schemas)
-- [Global schema](#global-schema)
-- [Section schemas](#section-schemas)
+- [Content Type schemas](data-model-reference#content-type-schema)
+- [Element schemas](data-model-reference#element-schemas)
+- [Global schema](data-model-reference#global-schema)
+- [Section schemas](data-model-reference#section-schema)
 
 ### Content Type schema
 A [Global](/concept/content-type)'s schema is defined in ```public/data/schemas/content-types.json``` like this:
@@ -50,7 +50,7 @@ See [Content Type data types](/concepts/data-types-content-type) for the data ty
 
 [https://github.com/richjava/builtjs-theme-corporate/blob/main/public/data/schemas/content-types.json](https://github.com/richjava/builtjs-theme-corporate/blob/main/data/schemas/content-types.json)
 
-### Element schema
+### Element schemas
 An [Element](/concept/element)'s schema is defined in ```public/data/schemas/elements.json``` like this:
 
 | Field         | Type   | Description                 |
@@ -124,7 +124,6 @@ A section's schema is defined in ```public/data/schemas/sections.json``` like th
 | Field      | Type   | Description                                            |
 | ---------- | ------ | ------------------------------------------------------ |
 | `name`        | String  | Camel case identifier            |
-| `category` | String | Category of section (possible values: "layout","body") |
 | `fields` | Object | Schema fields for the section                        |
 
 See [Section data types](/concepts/data-types-section) for the data types that can be used for Section fields.
@@ -136,7 +135,6 @@ See [Section data types](/concepts/data-types-section) for the data types that c
   "sections": {
     "mainLanding": {
       "name": "mainLanding",
-      "category": "sections",
       "fields": {
         "preheading": {
           "type": "element",
@@ -169,7 +167,7 @@ See [Section data types](/concepts/data-types-section) for the data types that c
 - [Page data](#page-data)
 - [Section data](#section-data)
 - [Template data](#template-data)
-- [Collection data](#collection-data)
+- [Collections data](#collections-data)
 - [Layout data](#layout-data)
 - [Global data](#global-data)
 - [App data](#app-data)
@@ -222,7 +220,7 @@ The `public/data/module-pages.json` JSON file consists of a ```modulePages``` ar
 | `name`        | String  | Camel case identifier            |
 | `description` | String | Description of ModulePage       |
 | `page`        | Object | References Page used in the ModulePage     |
-| `sections`    | Array of objects | References Sections used in the ModulePage. Object has ```name``` and ```position``` properties. ```position``` property is a value representing the section's position in the page. |
+| `sections`    | Array of objects | References Sections used in the ModulePage. Object has ```name``` and ```position``` properties. ```position``` property is a value representing the section's approximate initial position in the page when displayed Built Studio. The ```position``` property can be between 1 and 20 for body sections and 0 and -20 for head sections.  |
 
 #### Example
 
@@ -308,7 +306,7 @@ The `public/data/sections.json` JSON file consists of a ```sections``` array. Ea
 | ----------------- | ------ | --------------------------------------------------------- |
 | `name`        | String  | Camel case identifier            |
 | `title`       | String  | A succinct label for the Section  |
-| `category`        | String | Category of section (possible values: "layout","body")    |
+| `type`        | String | Category of section (possible values: "layout","body", "head"). Default: "body".    |
 | `description`     | String | Description of section                                    |
 | `templates`       | Array  | References templates used by section                      |
 | `defaultTemplate` | Object | Template that will be used by default                     |
@@ -352,7 +350,7 @@ The `public/data/sections.json` JSON file consists of a ```sections``` array. Ea
 
 ### Template data
 
-A Template represents the user interface of a Section. For example, the UI for a FAQ Section could be designed in a number of ways - an accordian, a list, etc. You can create a template for each of these designs and add them to your Section. Then in the [Built.JS Studio](https://studio.builtjs.com) the end user of the Theme can decide which Template to use for the Section.
+A Template represents the user interface of a Section. For example, the UI for a FAQ Section could be designed in a number of ways - an accordian, a list, etc. You can create a template for each of these designs and add them to your Section. Then in the [Built Studio](/built-studio) the end user of the Theme can decide which Template to use for the Section.
 
 A Template contains a reference to a React component. A Template may contain Elements.
 
@@ -479,7 +477,8 @@ The `public/data/global.json` JSON file consists of a ```global``` object with t
 
 ### App data
 
-App data describes the theme or plugin.
+App data describes the theme or plugin. For a theme, this data is located in `public/data/theme.json`. For a plugin, it will be in `public/data/plugin.json`.
+
 
 #### Theme Data Model
 The `public/data/theme.json` or `public/data/plugin.json` JSON file consists of a ```theme``` or ```plugin``` object with the following fields:
@@ -487,7 +486,7 @@ The `public/data/theme.json` or `public/data/plugin.json` JSON file consists of 
 | Field         | Type   | Description                              |
 | ------------- | ------ | ---------------------------------------- |
 | `version`     | String | Version of Theme                         |
-| `apiVersion`  | String | Built.JS version that Theme conforms to  |
+| `apiVersion`  | String | Built.js version that Theme conforms to  |
 | `displayName` | String | Name of Theme                            |
 | `description` | String | Description of Theme                     |
 | `imageUrl`    | String | Image to represent Theme                 |
