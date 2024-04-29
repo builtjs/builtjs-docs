@@ -5,12 +5,12 @@ import { Logo } from "./logo";
 const config: DocsThemeConfig = {
   logo: Logo,
   project: {
-    link: "https://github.com/builtjs/docs",
+    link: "https://github.com/builtjs/builtjs-docs",
   },
-  chat: {
-    link: "https://discord.com",
-  },
-  docsRepositoryBase: "https://github.com/builtjs/docs",
+  // chat: {
+  //   link: "https://discord.com",
+  // },
+  docsRepositoryBase: "https://github.com/builtjs/builtjs-docs",
   footer: {
     text: "Built.js",
   },
