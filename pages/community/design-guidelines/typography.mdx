@@ -2,45 +2,124 @@ import { Tabs } from "nextra/components";
 
 # Typography
 ## Display
-Display styles are the largest text on the screen, reserved for short, important text. They use a more expressive font, and are usually used sparingly. There are 4 sizes for Display.
+Display styles are the largest text on the screen, reserved for short, important text. They use a more expressive font, and are usually used sparingly. 
+
+There are 4 display options.
 
 | Token           | Example Size | Example Line Height |
 | --------------- | ------------ | ------------------- |
-| `display-01`    | 36px         | 44px                |
-| `display-02`    | 44px         | 52px                |
-| `display-03`    | 52px         | 64px                |
-| `display-04`    | 96px         | 112px               |
+| `display-xs`    | 36px         | 44px                |
+| `display-sm`    | 44px         | 52px                |
+| `display-md`    | 52px         | 64px                |
+| `display-lg`    | 96px         | 112px               |
+
 
 ## Headings
 There are 6 heading options.
 | Token           | Example Size | Example Line Height |
 | --------------- | ------------ | ------------------- |
-| `heading-01`    | 20px         | 28px               |
-| `heading-02`    | 24px         | 32px               |
-| `heading-03`    | 38px         | 36px               |
-| `heading-04`    | 32px         | 40px               |
-| `heading-05`    | 36px         | 44px               |
-| `heading-06`    | 40px         | 52px               |
+| `heading-xs`    | 20px         | 28px               |
+| `heading-sm`    | 24px         | 32px               |
+| `heading-md`    | 38px         | 36px               |
+| `heading-lg`    | 32px         | 40px               |
+| `heading-xl`    | 36px         | 44px               |
+| `heading-xxl`   d| 40px         | 52px               |
 
 ## Labels
 There are 4 label options.
 | Token           | Example Size | Example Line Height |
 | --------------- | ------------ | ------------------- |
-| `heading-01`    | 12px         | 16px               |
-| `heading-02`    | 14px         | 16px               |
-| `heading-03`    | 16px         | 20px               |
-| `heading-04`    | 18px         | 24px               |
+| `heading-xs`    | 12px         | 16px               |
+| `heading-sm`    | 14px         | 16px               |
+| `heading-md`    | 16px         | 20px               |
+| `heading-lg`    | 18px         | 24px               |
 
 ## Paragraphs
 There are 4 paragraph options.
 | Token           | Example Size | Example Line Height |
 | --------------- | ------------ | ------------------- |
-| `paragraph-01`  | 12px         | 20px                |
-| `paragraph-02`  | 14px         | 20px                |
-| `paragraph-03`  | 16px         | 24px                |
-| `paragraph-04`  | 18px         | 28px                |
+| `paragraph-xs`  | 12px         | 20px                |
+| `paragraph-sm`  | 14px         | 20px                |
+| `paragraph-md`  | 16px         | 24px                |
+| `paragraph-lg`  | 18px         | 28px                |
 
-### CSS implementation for typography
-```css filename="styles/globals.css" copy {3,6,9,10,11}
+## Tailwind configuration
+```js filename="tailwind.config.js" copy {3,4,5,6,7,8,9,10,11,12,13}
+module.exports = {
+  theme: {
+    // ...
+    extend: {
+      // ...
+      fontSize: {
+        // Display sizes
+        "display-xs": "2.25rem", // 36px
+        "display-sm": "2.75rem", // 44px
+        "display-md": "3.25rem", // 52px
+        "display-lg": "6rem", // 96px
+        
+        // Heading sizes
 
+        "heading-xs": "1.25rem", // 20px
+        "heading-sm": "1.5rem", // 24px
+        "heading-md": "2.375rem", // 38px
+        "heading-lg": "2rem", // 32px
+        "heading-xl": "2.25rem", // 36px
+        "heading-xxl": "2.5rem", // 40px
+
+        // Label sizes
+
+        "label-xs": "0.75rem", // 12px
+        "label-sm": "0.875rem", // 14px
+        "label-md": "1rem", // 16px
+        "label-lg": "1.125rem", // 18px
+
+        // Paragraph sizes
+
+        "paragraph-xs": "0.75rem", // 12px
+        "paragraph-sm": "0.875rem", // 14px
+        "paragraph-md": "1rem", // 16px
+        "paragraph-lg": "1.125rem", // 18px
+      },
+      lineHeight: {
+        // Display line heights
+        "display-xs": "2.75rem", // 44px
+        "display-sm": "3.25rem", // 52px
+        "display-md": "4rem", // 64px
+        "display-lg": "7rem", // 112px
+
+        // Heading line heights
+        "heading-xs": "1.75rem", // 28px
+        "heading-sm": "2rem", // 32px
+        "heading-md": "2.25rem", // 36px
+        "heading-lg": "2.5rem", // 40px
+        "heading-xl": "2.75rem", // 44px
+        "heading-xxl": "3.25rem", // 52px
+
+        // Label line heights
+        "label-xs": "1", // 16px
+        "label-sm": "1", // 16px
+        "label-md": "1.25rem", // 20px
+        "label-lg": "1.5rem", // 24px
+
+        // Paragraph line heights
+        "paragraph-xs": "1.25rem", // 20px
+        "paragraph-sm": "1.25rem", // 20px
+        "paragraph-md": "1.5rem", // 24px
+        "paragraph-lg": "1.75rem", // 28px
+      }
+    },
+  },
+  //...
+};
 ```
+Define in the CSS:
+```css filename="styles/globals.css" copy
+.heading-lg {
+  @apply text-heading-lg leading-heading-lg;
+}
+```
+And you can use it in the template like this:
+```tsx filename="components/templates/cards/cards1.tsx" copy
+<h3 className="heading-lg">{entry.title}</h3>
+```
+

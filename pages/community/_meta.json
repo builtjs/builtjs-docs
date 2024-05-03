@@ -1,8 +1,3 @@
 {
-  "index": "Introduction",
-  "concepts": "Concepts",
-  "guides": "Guides",
-  "data-model-reference": "Data Model Reference",
-  "community": "Community",
-  "error-reference": "Error Reference"
+  "design-guidelines": "Design Guidelines"
 }
