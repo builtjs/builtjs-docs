@@ -1,8 +1,6 @@
 # Built.js Docs 
 
-The official Built.js documentation.
-
-This is a project uses [Nextra](https://nextra.site).
+The official Built.js documentation. Visit Built.js at [builtjs.com](https://builtjs.com).
 
 
 ## Local Development
