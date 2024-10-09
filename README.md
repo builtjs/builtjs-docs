@@ -1,7 +1,6 @@
-# builtjs-docs-fumadocs
+# Built.js Docs 
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+The official Built.js documentation. Visit Built.js at [builtjs.com](https://builtjs.com).
 
 Run development server:
 
