@@ -73,9 +73,6 @@ export function CreateAppAnimation(): React.ReactElement {
         }
       }}
     >
-      {/* {tick > timeWindowOpen && (
-        <LaunchAppWindow className="absolute z-10 bottom-5 right-4 animate-in fade-in slide-in-from-top-10" />
-      )} */}
       <pre className="overflow-hidden text-xs border rounded-xl">
         <div className="flex flex-row items-center gap-2 px-4 py-2 border-b">
           <TerminalIcon className="size-4" />{' '}
@@ -87,25 +84,6 @@ export function CreateAppAnimation(): React.ReactElement {
           <code className="grid p-4">{lines}</code>
         </div>
       </pre>
-    </div>
-  );
-}
-
-function LaunchAppWindow(
-  props: HTMLAttributes<HTMLDivElement>,
-): React.ReactElement {
-  return (
-    <div
-      {...props}
-      className={cn(
-        'overflow-hidden rounded-md border bg-fd-background shadow-xl',
-        props.className,
-      )}
-    >
-      <div className="relative flex flex-row items-center h-6 px-4 text-xs border-b bg-fd-muted text-fd-muted-foreground">
-        <p className="absolute inset-x-0 text-center">localhost:3000</p>
-      </div>
-      <div className="p-4 text-sm">New App launched!</div>
     </div>
   );
 }
