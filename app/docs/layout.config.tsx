@@ -17,7 +17,7 @@ export const baseOptions: HomeLayoutProps = {
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g clip-path="url(#clip0_1006_16)">
+    <g clipPath="url(#clip0_1006_16)">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
