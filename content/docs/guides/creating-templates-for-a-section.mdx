@@ -1,0 +1,103 @@
+---
+title: Creating templates for a section
+description: Creating templates for a section
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+# Creating templates for a section
+
+You can easily create a template for section in [Built Studio](/built-studio), or you can do so in the code of the exported theme/plugin. The steps for creating a new section template are:
+
+<Steps>
+<Step>
+### Create the template configuration
+ 
+You can do this by creating a new template in Built Studio, or by manually creating a new object in ```public/data/templates.json``` like this:
+
+```json title="public/data/templates.json" copy
+{
+  "name": "cover1",
+  "title": "Cover 1",
+  "category": "covers",
+  "namespace": "richjava_corporate-basic",
+  "description": "Full viewport cover with text content and a supporting image."
+}
+```
+</Step>
+<Step>
+### Add the template to a section
+
+Add the template name to the `templates` array and, optionally, as the default template for the section.
+
+```json title="public/data/sections.json" copy
+{
+  "sections": [{
+    "name": "mainLanding",
+    "title": "Main Landing",
+    "description": "The home page landing area, containing the main call-to-action.",
+    "data": {
+      "preheading": { "text": "Preheading", "type": "plain" },
+      "heading": "Lorem ipsum dolor sit amet dev",
+      "blurb": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": {
+        "url": "https://res.cloudinary.com/dn7feeelf/image/upload/v1725878797/image_ldyekv.png",
+        "path": "/images/image-square.png",
+        "width": 768,
+        "height": 768,
+        "type": "image",
+        "attributeName": "image"
+      },
+      "buttonLinks": [
+        { "url": "/services", "label": "Button", "type": "primary" },
+        { "url": "/contact", "label": "Button", "type": "secondary" }
+      ]
+    },
+    "templates": ["cover1", "cover2", "cover3"],
+    "type": "body",
+    "defaultTemplate": { "name": "cover1" },
+    "collections": {}
+  }]
+}
+```
+</Step>
+<Step>
+### Add images of template UI
+
+Take a screenshot of your template and store the image in a publicly accessible location. Then, add the image url to the template object in `/public/data/templates.json`:
+
+```json title="public/data/templates.json" copy
+{
+  "templates": [{
+      "name": "cover1",
+      "title": "Cover 1",
+      "category": "covers",
+      "namespace": "richjava_corporate-basic",
+      "description": "Full viewport cover with text content and a supporting image.",
+      "imageUrl": "https://res.cloudinary.com/dn7feeelf/image/upload/v1725878863/cover1_mzktvz.png"
+    }
+  ]
+}
+```
+</Step>
+<Step>
+### Define the Github repository URL
+
+Adding this URL will allow the end user to learn more about the template when viewing it in Built Studio. 
+
+```json title="public/data/templates.json" copy
+{
+  "templates": [{
+      "name": "cover1",
+      "title": "Cover 1",
+      "category": "covers",
+      "namespace": "richjava_corporate-basic",
+      "description": "Full viewport cover with text content and a supporting image.",
+      "imageUrl": "https://res.cloudinary.com/dn7feeelf/image/upload/v1725878863/cover1_mzktvz.png",
+      "repoUrl": "https://github.com/richjava/corporate/blob/main/components/templates/covers/cover1.tsx"
+    }
+  ]
+}
+```
+</Step>
+</Steps>

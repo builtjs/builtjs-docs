@@ -1,0 +1,58 @@
+---
+title: Site concepts
+description: Site concepts for Built.js.
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+# Site
+
+You can create a site from a theme in the [Built Studio](/built-studio). When you export the site from the studio, a zip file is downloaded which contains a `config` directory and a `README.md` file.
+The README file contains all the directions to setup and run the project - a Next.js frontend with a Sanity CMS. Data will be stored and managed by Sanity in the cloud.
+
+## Accessing the Sanity Studio
+
+After running the site, you can access the project's Sanity Studio at `/admin`. It will include content for all section, entries, and global data in the site. Sanity schemas are defined in the project's `sanity/schemas` directory.
+
+## Next.js pages and components
+
+Components from the theme (and any plugins that the theme uses) are carried through into the site. This is an example of a page in a Built site:
+
+```tsx title="pages/index.tsx" copy
+import React from "react";
+import { getProps } from "@/lib/api";import { GetStaticProps } from "next";
+import Error from "next/error";
+import { withRouter } from "next/router";
+import Seo from "@/components/templates/head/seo";
+import GhRichjavaBuiltjsPluginBlogList2 from "@/components/plugins/gh_richjava_builtjs-plugin-blog/templates/lists/list2";
+import Cover1 from "@/components/templates/covers/cover1";
+import Layout from "@/components/layout";
+
+const Page = (props:any) => {
+  if (props.error) {
+    return <Error statusCode={props.error.code} />
+  }
+  return (
+     <>
+	<Seo content={props.homeSeoContent} />
+		<Layout headerContent={props.headerContent}  footerContent={props.footerContent} >
+			 <Cover1  content={props.mainLandingContent} />
+			 <GhRichjavaBuiltjsPluginBlogList2  content={props.blogTeaserContent} />
+			</Layout>
+		</>
+  );
+};
+
+export default withRouter(Page);
+
+export const getStaticProps: GetStaticProps = async () => {
+  let props = await getProps({pageName: 'home'});
+  return {
+    props: props,
+    revalidate: 10
+  };
+}
+```
+
+Learn more about how to create a site in [this guide](/guides/how-to-create-a-site).

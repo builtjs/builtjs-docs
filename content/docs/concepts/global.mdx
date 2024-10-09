@@ -1,0 +1,77 @@
+---
+title: Global data
+description: Global data concepts for Built.js themes and plugins.
+---
+
+# Global
+Global data is accessible in every template (Next.js component) in your site and can be configured for a theme. You can define the "schema" of this data in the ```public/data/schemas/global``` file of your theme, like this:
+
+```json title="public/data/schemas/global.json" copy
+{
+  "global": {
+    "fields": {
+      "name": {
+        "default": "Corporate Tailwind",
+        "type": "string"
+      },
+      "logo": {
+        "type": "image"
+      }
+    }
+  }
+}
+```
+
+Once you have your fields defined, you can set values in ```public/data/global.json```:
+```json title="public/data/global.json" copy
+{
+  "global": {
+    "name": "Corporate Tailwind",
+    "logo": {
+      "name": "builtjs",
+      "path": "/images/theme",
+      "ext": "svg",
+      "url": "/images/theme/builtjs.svg",
+      "width": 45,
+      "height": 45
+    }
+  }
+}
+```
+
+You can then access this data in any template in your theme, like this:
+```tsx title="components/templates/headers/header1.tsx" copy
+import Image from "next/image";
+import Link from "next/link";
+import { urlForImage, widthForImage, heightForImage } from "@/lib/utils";
+
+export default function Header1({ content }: any) {
+  if (!content) return <></>;
+  let { global = {} } = { ...content };
+  return (
+    <header id="header1" className="template">
+      <section className="p-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-screen-xl mx-auto">
+          <nav className="flex flex-wrap items-center">
+            <Link className="flex items-center pr-10 mr-auto" href="/">
+                <span className="relative w-10">
+                  <Image
+                    className="text-gray-400 bg-white fill-current dark:bg-gray-800"
+                    src={urlForImage(global?.logo)}
+                    width={widthForImage(global?.logo)}
+                    height={heightForImage(global?.logo)}
+                    layout="responsive"
+                    alt="logo"
+                  />
+                </span>
+                <span className="ml-3 text-xl font-bold text-black uppercase dark:text-white">
+                  {global.name}
+                </span>
+            </Link>
+          </nav>
+        </div>
+      </section>
+    </header>
+  );
+}
+```

@@ -1,0 +1,89 @@
+---
+title: Schema concepts
+description: Schema concepts for Built.js themes and plugins.
+---
+
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+# Schema
+
+In a Built.js theme or plugin, a schema defines the fields used in:
+
+- [Content Types](/docs/concepts/content-type)
+- [Elements](/docs/concepts/element)
+- [Global](/docs/concepts/global)
+- [Sections](/docs/concepts/section)
+
+This means that you can select the fields you want for any of these and when the site is built, it will come with a Sanity CMS which includes the fields you defined.
+The easiest way to configure schemas is through the Theme/Plugin Design in the [Built Studio](/built-studio).
+A content type can have the following data types:
+
+- `biginteger`
+- `boolean`
+- `date`
+- `decimal`
+- `email`
+- `enumeration`
+- `float`
+- `image`
+- `integer`
+- `json`
+- `password`
+- `relation`
+- `portabletext`
+- `string`
+- `text`
+- `time`
+
+Element, global, and section content types can also have the above-mentioned fields, except:
+
+- `relation`, because a relation field defines the relationship (e.g. "one to many") between content types only.
+- `uid`, because this is used for slugs of content types only.
+
+Find out more about [data types](/docs/concepts/data-types-common).
+
+When you export your theme or plugin from the studio, a `schemas` directory will be created in the `public/data` directory with the following JSON files:
+
+<Files>
+  <Folder name="public" defaultOpen>
+    <Folder name="data" defaultOpen>
+      <Folder name="schemas" defaultOpen>
+        <File name="content-types.json" />
+        <File name="elements.json" />
+        <File name="global.json" />
+        <File name="sections.json" />
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+Each of these JSON files will have a `fields` object which will contain the definitions, like this:
+
+```json copy
+...
+"fields": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "body": {
+      "type": "portabletext"
+    },
+    "description": {
+      "type": "text"
+    },
+    "featuredImage": {
+      "type": "image"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    }
+},
+...
+```

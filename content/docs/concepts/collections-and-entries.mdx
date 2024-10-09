@@ -1,0 +1,171 @@
+---
+title: Collection and entry data
+description: Collection and entry data concepts for Built.js themes and plugins.
+---
+
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+# Collections and entries
+
+An Entry is a database record in a collection, like a single blog post, an author, or a product. When you create a theme or plugin through the [Built Studio](/built-studio), before you can create an entry, you will need to create a content type, which defines the fields for entries.
+
+When you export a theme or plugin and Next.js theme project (see "Creating a new theme"), you can find entry data in `public/data/collections/[content-type-plural-name].json`.
+
+<Files>
+  <Folder name="public" defaultOpen>
+    <Folder name="data" defaultOpen>
+      <Folder name="collections" defaultOpen>
+        <File name="authors.json" />
+        <File name="..." />
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+Here's an example:
+
+```json title="public/data/collections/authors.json" copy
+{
+  "data": [
+    {
+      "_id": "author-eb4f3b3c-04ed-4e08-b8fb-6b7db6efcb80",
+      "_type": "author",
+      "slug": "bob-brown",
+      "fullName": "Bob Brown",
+      "profile": "profile-fb4f3b3c-04ed-4e08-b8fb-6b7db6efcb60"
+    }
+  ]
+}
+```
+
+In this code, "profile" is a reference to another entry and this can be populated, or "expanded" if you need to access the data in a section template. This is how you can make this "authors" collection data available in a section:
+
+```json title="public/data/sections.json" copy
+{
+  "sections": [
+    {
+      "name": "team",
+      ...
+      "collections": {
+        "author": {
+          "config": {
+            "populate": ["profile"],
+            "limit": 3
+          },
+          "article": {
+            "name": "authorArticle"
+          }
+        }
+      }
+    },
+  ]
+}
+```
+
+The "article" property in this code indicates that an article page should be available for this collection (the "authorArticle" is a [ModulePage](/docs/concepts/module-page) that defines the page and sections needed for the article.
+
+This is how the entries can be used in a React component, "ProfileCards1", which is a template for the "team" section:
+
+```json title="components/templates/cards/profile-cards1/profile-cards1.tsx" copy
+import Image from "next/image";
+import Link from "next/link";
+import { urlForImage, collectionSlug, entrySlug } from "@/lib/utils";
+
+export default function ProfileCards1({ content }: any) {
+  if (!content) return <></>;
+  let { collections = null } = { ...content };
+  let data: any = null;
+  const DEFAULT_COLS = 3;
+  const cols = (data && data.columns) || DEFAULT_COLS;
+  if (!collections) {
+    throw new Error("No template collections");
+  }
+  let collectionName = Object.keys(collections)[0];
+  let collection = collections[collectionName];
+
+  return (
+    <section id="profile-cards-1" className="template">
+      <div className="max-w-screen-xl mx-auto">
+        <div
+          className={`grid grid-cols-1 gap-x-6 gap-y-16 lg:grid-cols-${cols}`}
+        >
+          {collection &&
+            collection.slice(0, cols).map((author: any, i: number) => (
+              <div key={i}>
+                <Link href={`/${collectionSlug(author)}/${entrySlug(author)}`}>
+                  <div className="relative w-full h-56 transition-opacity rounded-b-none hover:opacity-80">
+                    <Image
+                      className="rounded-b-none"
+                      src={urlForImage(author?.profile?.profileImage)}
+                      layout="fill"
+                      objectFit="cover"
+                      alt={author.fullName}
+                    />
+                  </div>
+                </Link>
+                <div className="p-6 px-8 border border-t-0 border-gray-200 rounded-b-lg dark:border-gray-700">
+                  <span className={`preheading blank left`}>
+                    {author.position}
+                  </span>
+                  <Link
+                    className="no-underline"
+                    href={`/${collectionSlug(author)}/${entrySlug(author)}`}
+                  >
+                    <h3 className="mb-4 hover:text-gray-700 dark:hover:text-gray-200">
+                      {author.fullName}
+                    </h3>
+                  </Link>
+                  <p>{author?.profile?.excerpt}</p>
+                  <Link href={`/${collectionSlug(author)}/${entrySlug(author)}`}>
+                    Read More
+                  </Link>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+And because the article was specified, the we can have an article page in `pages/author/[slug].tsx` and the entry will be available to any section templates in the page. In the following code, "ProfileArticle1" is a React component for a section template on the "authorArticle" page.
+
+```json title="components/templates/articles/profile-article1/profile-article1.tsx" copy
+import Image from "next/image";
+import { urlForImage, widthForImage, heightForImage } from "@/lib/utils";
+import BlockContent from '@sanity/block-content-to-react';
+
+export default function ProfileArticle1({ content }:any) {
+  if (!content) return <></>;
+  let { entry: author = null } = { ...content };
+
+  let profile = author ? author.profile : null;
+  return (
+    <article id="profile-article1" className="template">
+      {author && (
+        <div className="max-w-screen-xl mx-auto">
+          <header className="max-w-4xl mx-auto">
+            <span className={`preheading blank left`}>
+              {profile?.position}
+            </span>
+            <div className="flex items-center">
+              <h1 className="mb-10">{author.fullName}</h1>
+            </div>
+          </header>
+          {profile.profileImage && <div className="relative mb-20">
+            <Image
+              src={urlForImage(profile?.profileImage)}
+              width={widthForImage(profile?.profileImage)}
+              height={heightForImage(profile?.profileImage)}
+              layout="responsive"
+              alt={author.fullName}
+            />
+          </div>}
+          <BlockContent blocks={profile?.bio} />
+        </div>
+      )}
+    </article>
+  );
+}
+```

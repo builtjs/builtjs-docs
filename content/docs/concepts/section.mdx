@@ -1,0 +1,110 @@
+---
+title: Section data
+description: Section data concepts for Built.js themes and plugins.
+---
+
+# Section
+
+A Section represents a section of a web page. In [Built Studio](/built-studio), you can define the fields a section will have and then the data that will be passed to the section.
+Once you've exported the theme or plugin and set up your Next.js theme/plugin project, you will find the field configuration in ```public/data/schemas/sections.json```:
+
+```json title="public/data/schemas/sections.json" copy
+{
+  "sections": [
+    "mainLanding": {
+      "name": "mainLanding",
+      "fields": {
+        "preheading": {
+          "type": "element",
+          "repeatable": false,
+          "element": "preheading"
+        },
+        "heading": {
+          "type": "string"
+        },
+        "blurb": { "type": "text" },
+        "image": {
+          "type": "image"
+        },
+        "buttonLinks": {
+          "type": "element",
+          "repeatable": true,
+          "element": "buttonLink"
+        }
+      }
+    }
+  ]
+}
+```
+
+And the section data will be in the ```public/data/sections.json```:
+```json title="public/data/sections.json" copy
+{
+  "sections": [
+    {
+      "name": "mainLanding",
+      "title": "Main Landing",
+      "description": "The home page landing area, containing the main call-to-action.",
+      "templates": ["cover1", "cover2", "cover3", "cover4", "cover5"],
+      "defaultTemplate": {
+        "name": "cover1"
+      },
+      "data": {
+        "preheading": {
+          "text": "Preheading",
+          "type": "plain"
+        },
+        "heading": "Lorem ipsum dolor sit amet dev",
+        "blurb": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "image": {
+          "name": "image-square",
+          "path": "/images/theme",
+          "ext": "png",
+          "url": "/images/theme/image-square.png",
+          "width": 768,
+          "height": 768
+        },
+        "buttonLinks": [
+          {
+            "url": "/services",
+            "label": "Button",
+            "type": "primary"
+          },
+          {
+            "url": "/contact",
+            "label": "Button",
+            "type": "secondary"
+          }
+        ]
+      }
+    } 
+  ]
+}
+```
+
+As you can see in the code, a section has one or more templates. Creating more templates for a section will allow the end user more options to choose from for a section when creating a site from the theme.
+
+Instead of directly defining sections in a page, they are defined in a ModulePage instead so that the sections for pages can be associated with modules:
+
+```json title="public/data/module-pages.json" copy
+{
+  "modulePages": [
+    {
+      "name": "homeBase",
+      "description": "Home page base sections",
+      "page": {
+        "name": "home"
+      },
+      "sections": [
+        ...,
+        {
+          "name": "mainLanding",
+          "position": 1
+        }
+      ]
+    }
+  ]
+}
+```
+
+As you can see, this is also where you specify where you think the section should appear in the page. A section with a low "position" like `0` will appear at the top of the page in Built Studio, and sections with higher position values will appear further down the page (however the end user can still move a section to a different position in Built Studio, or to a different page).

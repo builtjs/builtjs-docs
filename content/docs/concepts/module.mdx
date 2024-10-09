@@ -1,0 +1,68 @@
+---
+title: Module data
+description: Module data concepts for Built.js themes and plugins.
+---
+
+# Module
+
+A Module represents all the features and functionality to fulfill a particular use case. It is a top-level architectural component for a site, containing all the pages and sections necessary to fulfil a requirement.
+
+It represents a business use case, like "Make Contact" or "View Features" but is usually named simply with one word (like "Contact" or "Features").
+
+For example, if you have a client who wants a their audience to learn about their business in their website, the use case might look like this:
+
+> Learn about organization
+
+From an information architecture point of view, this might result in these pages and sections:
+- About page with one section called "About Landing"
+- About Teaser section (on Home page) called "About Teaser"
+
+In a Built.js Theme, all of this would be encapsulated in what we call a "Module" (in this case called "About").
+
+The code to create this module in your Built.js Theme would look like this:
+```json title="public/data/modules.json" copy
+{
+  "modules": [
+    {
+      "name": "about",
+      "title": "About",
+      "description": "Provides information related to the organisation",
+      "modulePages": [
+        {
+          "name": "aboutBase"
+        },
+        {
+          "name": "homeAboutTeaser"
+        }
+      ]
+    }
+  ]
+}
+```
+As you can see, a module has Module Pages, which help you to configure which sections go on which pages for the module.
+
+You can also include another module as a submodule, like this:
+
+```json title="public/data/modules.json" copy
+{
+  "modules": [
+    {
+      ...
+      "modules": [
+        {
+          "name": "team"
+        }
+      ]
+    },
+    {
+      "name": "team",
+      ...
+      "parent": {
+        "name": "about"
+      }
+    }
+  ]
+}
+```
+
+To learn more about how the core components of a Built.js theme or plugin related to each other, check out the [Data Model Reference](/data-model-reference).

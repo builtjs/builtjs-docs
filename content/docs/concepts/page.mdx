@@ -1,0 +1,24 @@
+---
+title: Page data
+description: Page data concepts for Built.js themes and plugins.
+---
+
+# Page
+
+A Page represents a web page. You may expect a Page to have sections, but Built themes and plugin pages do not. Instead, it's a ModulePage which specifies which sections belong to a page. This way, pages and sections can be wrapped up in a module so the end user of the theme can choose to include the pages and sections by simply adding a module.
+
+After you've exported the theme/plugin from [Built Studio](/built-studio), you can find the page configuration in ```public/data/pages.json```. This is an example of a page:
+
+```json title="public/data/pages.json" copy
+{
+  "pages": [
+    {
+      "name": "home",
+      "title": "Home"
+    },
+    ...
+  ]
+}
+```
+
+In order to specify which sections belong on a page, you need to create a [module page](/docs/concepts/module-page). 

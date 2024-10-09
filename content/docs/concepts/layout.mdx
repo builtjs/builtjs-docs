@@ -1,0 +1,46 @@
+---
+title: Layout data
+description: Layout data concepts for Built.js themes.
+---
+
+# Layout
+
+When you export a Theme or Plugin, by default, the layout will be a simple header and footer with the main content between. You can see this in the exported theme/plugin's ```public/data/layout.json```:
+```json title="public/data/layout.json" copy
+{
+  "layout": {
+    "contentIndex": 1,
+    "sections": [
+      {
+        "name": "header"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  }
+}
+```
+
+The "contentIndex" with value of 1 means that the main content (all the module's sections) should be inserted at an index of 1. In the sections array above, inserting at index of 1 would put the main content between the header and the footer.
+When the site is built from the theme, the ```components/layout/layout.js``` file would look like this: 
+
+```tsx title="components/layout/layout.js" copy
+import Header1 from "@/components/templates/headers/header1/header1";
+import Footer1 from "@/components/templates/footers/footer1/footer1";
+const Layout = (props) => {
+  const { children, headerContent, footerContent } = props;
+  return (
+    <>
+      <Header1 content={headerContent} />
+        <main>{children}</main>
+      <Footer1 content={footerContent} />
+    </>
+  );
+};
+
+export default Layout;
+```
+<Callout type="info">
+  Please note that Built.js themes and sites use one common layout for all pages.
+</Callout>

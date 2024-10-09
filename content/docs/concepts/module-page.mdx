@@ -1,0 +1,104 @@
+---
+title: Module page data
+description: Module page data concepts for Built.js themes and plugins.
+---
+
+# Module Page
+
+A Module Page is a page with sections that belongs to a particular module. For example, if you want to have a module called "contact" for users to be able to get in touch, you may want:
+- A contact page with a landing section that has your contact details
+- A section on the services page that will encourage users to go to the contact page
+
+You can specify the landing section for the contact page like this:
+```json title="public/data/module-pages.json" copy
+{
+  "modulePages": [
+    {
+      "name": "contactBase",
+      "description": "Contact page base sections",
+      "page": {
+        "name": "contact"
+      },
+      "sections": [
+        {
+          "name": "contactSeo",
+          "position": 0
+        },
+        {
+          "name": "contactLanding",
+          "position": 1
+        }
+      ]
+    }
+  ]
+}
+```
+
+And the services page section, like this:
+
+```json title="public/data/module-pages.json" copy
+{
+  "modulePages": [
+    ...
+    {
+      "name": "servicesContactTeaser",
+      "description": "Teaser for Contact page on Services page",
+      "page": {
+        "name": "services"
+      },
+      "sections": [
+        {
+          "name": "contactTeaser",
+          "position": 4
+        }
+      ]
+    }
+  ]
+}
+```
+
+NOTE: The "position" property can have a number value from 0 upwards which specifies where a section should appear on the page. A section with a position of 0 would be at the top of the page ones with higher values being below that.
+
+Now you have some module pages, you can include them in your module, like this:
+```json title="public/data/modules.json" copy
+{
+  "modules": [
+    {
+      "name": "contact",
+      "title": "Contact",
+      "description": "Encourages and facilitates making contact",
+      "modulePages": [
+        {
+          "name": "contactBase"
+        },
+        {
+          "name": "servicesContactTeaser"
+        }
+      ]
+    }
+  ]
+}
+```
+
+But there is a problem with this. The services page doesn't belong in the "contact" module, it belongs in another module, called "services" so the "servicesContactTeaser" Module Page in the "About" module is dependent on whether or not the end user has chosen to include the "Services" module in their site. 
+In order to specify this dependency, we can add the "forModule" property, like this:
+
+```json title="public/data/modules.json" copy
+{
+  "modules": [
+    {
+      "name": "contact",
+      ...
+      "modulePages": [
+        ...
+        {
+          "name": "servicesContactTeaser",
+          "forModule": {
+            "name": "services"
+          }
+        }
+      ]
+    }
+  ]
+}
+```

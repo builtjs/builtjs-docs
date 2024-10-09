@@ -96,10 +96,5 @@ export const baseOptions: HomeLayoutProps = {
       url: '/docs',
       active: 'nested-url',
     },
-    // {
-    //   text: 'Sponsors',
-    //   url: '/sponsors',
-    //   active: 'nested-url',
-    // },
   ],
 };

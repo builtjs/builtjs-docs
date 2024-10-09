@@ -1,0 +1,132 @@
+---
+title: Article data
+description: Article data concepts for Built.js themes and plugins.
+---
+
+# Article
+
+An Article is the detail page for an entry of a collection. You can specify whether or not you want a collection of entries in a particular section to have to have an article. For example, a section may contain list of blog entries, and clicking on any of these list items would take you to the entry's article page. 
+
+In the Theme/Plugin Designer in [Built Studio](/built-studio), you can specify whether a section collection should have an article.
+After exporting the theme or plugin, if you look in ```public/data/sections.json```, you can find the section that you specified to have a collection with article, and you will see the corresponding collection will have an article property. In the example below, the ```name``` property for the article is "blogArticle". This is the name of the ModulePage that you want to use for the article page (it defines which page and sections to use):
+
+```json title="public/data/sections.json" copy
+{
+  "sections": [
+    {
+      "name": "blogLanding",
+      "title": "Blog Landing",
+      "description": "The blog page landing area. This area contains the latest published blog post.",
+      "templates": ["list1"],
+      "defaultTemplate": {
+        "name": "list1"
+      },
+      "collections": {
+        "post": {
+          "config": {
+            "sort": {
+              "0": "date:asc"
+            },
+            "limit": 1,
+            "populate": ["tags"]
+          },
+          "article": {
+            "name": "blogArticle"
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+By default, an "entry" object will be made available to every template in the the article page, like this example:
+
+```tsx title="components/templates/articles/profile-article1/profile-article1.tsx" copy
+export default function ProfileArticle1({ content }:any) {
+  if (!content) return <></>;
+  let { entry: author = null } = { ...content };
+
+  let profile = author ? author.profile : null;
+  return (
+    <article id="profile-article1" className="template">
+      {author && (
+        <div className="max-w-screen-xl mx-auto">
+          <header className="max-w-4xl mx-auto">
+            <span className={`preheading blank left`}>
+              {profile?.position}
+            </span>
+            <div className="flex items-center">
+              <h1>{author.fullName}</h1>
+            </div>
+          </header>
+          {profile.profileImage && <div className="relative mb-20">
+            <Image
+              src={urlForImage(profile?.profileImage)}
+              width={widthForImage(profile?.profileImage)}
+              height={heightForImage(profile?.profileImage)}
+              layout="responsive"
+              alt={author.fullName}
+            />
+          </div>}
+          <BlockContent blocks={profile?.bio} />
+        </div>
+      )}
+    </article>
+  );
+}
+```
+
+You need to specify the page that will be used for the article. In your Next.js theme, by default this will be a page in ```pages``` directory in a folder with the name of the content type and a flie name of ```[slug]```, like ```pages/author/[slug].tsx```.  The page will look something like this:
+
+```tsx title="pages/author/[slug].tsx" copy
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { withRouter } from "next/router";
+import { getConfig, getEntries } from "@builtjs/theme";
+import Page from "@/lib/page";
+import { entrySlug } from "@/lib/utils";
+import { pages } from "@/lib/constants";
+
+export default withRouter(Page);
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const name = 'author';
+  const allEntries:any = await fetchEntries(name);
+  return {
+    paths: allEntries.entries.map((entry: any) => `/${name}/${entrySlug(entry)}`) ?? [],
+    fallback: true,
+  };
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const config = await getConfig({pageName: pages.AUTHOR_ARTICLE});
+  config.params = context.params;
+  return {
+    props: { config }
+  };
+};
+```
+
+In your configuration, you also need to define the content type of the entry that will be used in the article page. If you do this in [Built Studio](/built-studio), after export you will see it will be applied in ```public/data/pages.json```:
+
+```json title="public/data/pages.json" copy
+{
+  "pages": [
+    ...
+    {
+      "name": "authorArticle",
+      "title": "Author Article",
+      "contentType": {
+        "name": "author",
+        "config": {
+          "populate": [{
+            "name": "profile"
+          }]
+        }
+      },
+      ...
+    },
+    ...
+  ]
+}
+```

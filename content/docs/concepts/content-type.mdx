@@ -1,0 +1,188 @@
+---
+title: Content type data
+description: Content type data concepts for Built.js themes and plugins.
+---
+
+# ContentType
+
+A content type defines the fields for an entry of a collection (see "[Collections and entries](/docs/concepts/collections-and-entries)").
+
+This is an example of an "author" content type and the author's profile:
+
+```json title="public/data/schemas/content-types.json" copy
+{
+  "contentTypes": [
+    {
+      "name": "author",
+      "title": "Author",
+      "dataPosition": 2,
+      "fields": {
+        "fullName": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "uid",
+          "targetField": "fullName",
+          "required": true
+        },
+        "profile": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "profile"
+        }
+      }
+    },
+    {
+      "name": "profile",
+      "title": "Profile",
+      "dataPosition": 1,
+      "fields": {
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "excerpt": {
+          "type": "text",
+          "required": false
+        },
+        "bio": {
+          "type": "portabletext"
+        },
+        "position": {
+          "type": "string",
+          "required": false
+        },
+        "profileImage": {
+          "type": "image"
+        }
+      }
+    }
+  ]
+}
+```
+
+The fields available for a content type are:
+
+## `biginteger`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `boolean`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `date`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `decimal`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `element`
+An [Element](/docs/concepts/elements) represents a reusable UI component. 
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| element  | Name of the element                   | true     |
+| repeatable  | Whether the value is single or multiple values. Default: `false` | false |
+| required | Determines if value is required. Default: `false` | false |
+
+## `email`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `enumeration`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| values     | Comma separated list of string values.                 | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `integer`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `json`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `password`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `portabletext`
+[Portable Text](https://sanity.io/docs/block-content) is a presentation-agnostic specification for block content that you can use with [Sanity](https://sanity.io). 
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `relation`
+
+A relation describes a relationship between this content type and another.
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| target   | The name of the relation content type. | true |
+| relation | `onToOne` or `manyToOne`        | true     |
+| required | Determines if value is required. Default: `false` | false    |
+
+## `string`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `text`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `time`
+
+| Property | Description                     | Required |
+| -------- | ------------------------------- | -------- |
+| type     | The data type                   | true     |
+| required | Determines if value is required. Default: `false` | false |
+
+## `uid`
+
+A data type for slugs which is typically used to create unique URLs.
+
+| Property    | Description                                   | Required |
+| ----------- | --------------------------------------------- | -------- |
+| type        | The data type                                 | true     |
+| targetField | The name of the field to create the slug from. | true     |
+| required    | Determines if value is required.               | true     |

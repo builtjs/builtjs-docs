@@ -1,0 +1,27 @@
+{
+    "title": "Concepts",
+    "pages": [
+      "concepts-overview",
+      "theme",
+      "plugin",
+      "lifecycle-of-a-theme-or-plugin",
+      "data-files",
+      "schema",
+      "data-types-common",
+      "data-types-content-type",
+      "data-types-section",
+      "content-type",
+      "module",
+      "module-page",
+      "page",
+      "section",
+      "template",
+      "element",
+      "global",
+      "layout",
+      "app",
+      "article",
+      "collections-and-entries",
+      "site"
+    ]
+  }
