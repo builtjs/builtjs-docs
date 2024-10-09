@@ -4,9 +4,9 @@ import {
   PaperclipIcon,
   type LucideIcon,
 } from 'lucide-react';
-import mdx from '../../../packages/mdx/package.json';
-import ui from '../../../packages/ui/package.json';
-import zeta from '../../../packages/core/package.json';
+// import mdx from '../../../packages/mdx/package.json';
+// import ui from '../../../packages/ui/package.json';
+// import zeta from '../../../packages/core/package.json';
 
 export interface Mode {
   param: string;
@@ -17,25 +17,25 @@ export interface Mode {
 }
 
 export const modes: Mode[] = [
-  {
-    param: 'ui',
-    name: 'Framework',
-    description: 'The docs framework',
-    version: ui.version,
-    icon: Building2,
-  },
-  {
-    param: 'headless',
-    name: 'Core',
-    description: 'The core library',
-    version: zeta.version,
-    icon: LibraryIcon,
-  },
-  {
-    param: 'mdx',
-    name: 'MDX',
-    description: 'Built-in source provider',
-    version: mdx.version,
-    icon: PaperclipIcon,
-  },
+  // {
+  //   param: 'ui',
+  //   name: 'Framework',
+  //   description: 'The docs framework',
+  //   version: ui.version,
+  //   icon: Building2,
+  // },
+  // {
+  //   param: 'headless',
+  //   name: 'Core',
+  //   description: 'The core library',
+  //   version: zeta.version,
+  //   icon: LibraryIcon,
+  // },
+  // {
+  //   param: 'mdx',
+  //   name: 'MDX',
+  //   description: 'Built-in source provider',
+  //   version: mdx.version,
+  //   icon: PaperclipIcon,
+  // },
 ];
