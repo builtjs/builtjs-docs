@@ -3,8 +3,6 @@ title: Content type data types
 description: Data types for Built.js themes and plugin content types.
 ---
 
-# Content Type data types
-
 The data types available for a Built.js [Content Type](/docs/concepts/content-type) are all the [common data-types](/docs/concepts/data-types-common) plus the following:
 
 ## `relation`
@@ -15,7 +13,7 @@ A relation describes a relationship between this content type and another.
 | -------- | ------------------------------- | -------- |
 | type     | The data type                   | true     |
 | target   | The name of the relation content type. | true |
-| relation | `oneToOne` or `manyToOne`        | true     |
+| relation | `oneToOne`, `manyToOne` or `oneToMany` | true     |
 | required | Determines if value is required. Default: `false` | false    |
 
 ## `uid`

@@ -1,0 +1,586 @@
+---
+title: Data Model Reference
+description: Reference for the Built.js Data Model
+---
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+The Built.js data model is represented in a theme or plugin Next.js project by JSON data files in the ```public/data``` directory of the project. 
+
+Data files contain JSON data used for configuration of theme or plugin's pages, sections, plugins and more. They are kept in ```public/data```.  
+
+These are the folders and files that you will find in this directory for a theme:
+
+<Files>
+  <Folder name="public" defaultOpen>
+    <Folder name="data" defaultOpen>
+    <Folder name="collections" defaultOpen>
+      <File name="authors.json" />
+    </Folder>
+    <Folder name="schemas" defaultOpen>
+      <File name="content-types.json" />
+      <File name="elements.json" />
+      <File name="global.json" />
+      <File name="sections.json" />
+    </Folder>
+      <File name="global.json" />
+      <File name="layout.json" />
+      <File name="module-pages.json" />
+      <File name="modules.json" />
+      <File name="pages.json" />
+      <File name="sections.json" />
+      <File name="templates.json" />
+      <File name="theme.json" />
+    </Folder>
+  </Folder>
+</Files>
+
+<Callout type="info">
+  For a plugin, you will find a `plugin.json` file instead of `theme.json`. See [App data](#app-data)
+</Callout>
+
+## Schema files
+These files, located in ```public/data/schemas```, create the definitions that will be used for [Sanity](https://sanity.io) schemas when the site is built.
+- [Content Type schemas](#content-type-schema)
+- [Element schemas](#element-schemas)
+- [Global schema](#global-schema)
+- [Section schemas](#section-schema)
+
+### Content Type schema
+A [Content Type](/docs/concepts/content-type)'s schema is defined in ```public/data/schemas/content-types.json``` like this:
+
+| Field                 | Type   | Description                   |
+| --------------------- | ------ | ----------------------------- |
+| `name`        | String  | Camel case identifier            |
+| `title`       | String  | A succinct label for the Content Type  |
+| `dataPosition`       | Number  | This is used during the setup process for a site. It determines the order of creation for Sanity schemas and is used when you need to create a schema before or after another due to the relationship.  |
+| `fields`       | Object | Schema fields for Content Type   |
+
+See [Content Type data types](/docs/concepts/data-types-content-type) for the data types that can be used for Content Type fields.
+
+#### Example
+
+```json filename="public/data/schemas/content-types.json" copy
+{
+  "contentTypes": [
+     {
+      "name": "author",
+      "title": "Author",
+      "dataPosition": 2,
+      "fields": {
+        "fullName": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "uid",
+          "targetField": "fullName",
+          "required": true
+        },
+        "profile": {
+          "type": "relation",
+          "relation": "oneToOne",
+          "target": "profile"
+        },
+        "posts": {
+          "type": "relation",
+          "relation": "oneToMany",
+          "target": "post",
+          "mappedBy": "author"
+        }
+      }
+    }]
+  }
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/schemas/content-types.json](https://github.com/richjava/corporate-basic/blob/main/public/data/schemas/content-types.json)
+
+### Element schemas
+An [Element](/docs/concepts/element)'s schema is defined in ```public/data/schemas/elements.json``` like this:
+
+| Field         | Type   | Description                 |
+| ------------- | ------ | --------------------------- |
+| `name`        | String  | Camel case identifier            |
+| `title`       | String  | A succinct label for the Element  |
+| `fields`    | Object | Schema fields for Element        |
+
+See [common data types](/docs/concepts/data-types-common) for the data types that can be used for Element fields.
+
+#### Example
+
+```json filename="public/data/schemas/elements.json" copy
+{
+  "elements": [
+    {
+      "name": "button",
+      "title": "Button",
+      "fields": {
+        "slug": {
+          "type": "uid",
+          "targetField": "label",
+          "required": true
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  ]
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/schemas/elements.json](https://github.com/richjava/corporate-basic/blob/main/public/data/schemas/elements.json)
+
+### Global schema 
+A [Global](/docs/concepts/global)'s schema is defined in ```public/data/schemas/global.json``` like this:
+
+| Field         | Type   | Description                 |
+| ------------- | ------ | --------------------------- |
+| `fields`    | Object | Schema fields for Element        |
+
+See [common data types](/docs/concepts/data-types-common) for the data types that can be used for Global fields.
+
+#### Example
+
+```json filename="public/data/schemas/global.json" copy
+{
+  "global": {
+    "fields": {
+      "name": {
+        "default": "Corporate Tailwind",
+        "type": "string"
+      },
+      "logo": {
+        "type": "image"
+      }
+    }
+  }
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/schemas/global.json](https://github.com/richjava/corporate-basic/blob/main/public/data/schemas/global.json)
+
+#### Section schema 
+A section's schema is defined in ```public/data/schemas/sections.json``` like this:
+
+| Field      | Type   | Description                                            |
+| ---------- | ------ | ------------------------------------------------------ |
+| `name`        | String  | Camel case identifier            |
+| `type`        | String  | Type of section (possible values: "body", "head")            |
+| `fields` | Object | Schema fields for the section                        |
+
+See [Section data types](/docs/concepts/data-types-section) for the data types that can be used for Section fields.
+
+#### Example
+
+```json filename="public/data/schemas/sections.json" copy
+{
+  "sections": {
+    "mainLanding": {
+      "name": "mainLanding",
+      "type": "body",
+      "fields": {
+        "preheading": {
+          "type": "element",
+          "repeatable": false,
+          "element": "preheading"
+        },
+        "heading": { "type": "string" },
+        "blurb": { "type": "text" },
+        "image": { "type": "image" },
+        "buttonLinks": {
+          "type": "element",
+          "repeatable": true,
+          "element": "buttonLink"
+        }
+      }
+    }
+  }
+}
+```
+[https://github.com/richjava/corporate-basic/blob/main/public/data/schemas/sections.json](https://github.com/richjava/corporate-basic/blob/main/public/data/schemas/sections.json)
+
+
+## Data files
+- [Module data](#module-data)
+- [Module Page data](#module-page-data)
+- [Page data](#page-data)
+- [Section data](#section-data)
+- [Template data](#template-data)
+- [Collections data](#collections-data)
+- [Layout data](#layout-data)
+- [Global data](#global-data)
+- [App data](#app-data)
+
+### Module data
+
+A Module is represents a business use case, like "Make Contact" but is usually named simply with one word (like "Contact"). Learn more about Modules [here](/docs/concepts/module).
+
+#### Module Data Model
+The `public/data/modules.json` JSON file consists of a ```modules``` array. Each object in the array may have the following fields:
+
+| Field         | Type    | Description                      |
+| ------------- | ------- | -------------------------------- |
+| `name`        | String  | Camel case identifier            |
+| `title`       | String  | A succinct label for the Module  |
+| `description` | String  | A description of how the module fulfills a use case |
+| `required`    | Boolean | Determines if Module is required |
+| `modulePages` | Array   | References the ModulePages used in the Module. `name` property in each object in array is reference to module page.  |
+
+#### Example
+
+`public/data/modules.json`
+
+```json filename="public/data/modules.json" copy
+{
+  "modules": [{
+      "name": "introduce",
+      "title": "Introduce",
+      "description": "Familiarizes users with your product or service",
+      "required": true,
+      "modulePages": [{ "name": "homeBase" }]
+    }]
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/modules.json](https://github.com/richjava/corporate-basic/blob/main/public/data/modules.json)
+
+### Module Page data
+
+A Module Page contains a Page and a collection of Sections.
+
+#### ModulePage Data Model
+The `public/data/module-pages.json` JSON file consists of a ```modulePages``` array. Each object in the array may have the following fields:
+
+| Field         | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| `name`        | String  | Camel case identifier            |
+| `page`        | Object | References Page used in the ModulePage. `name` property is reference to page.     |
+| `sections`    | Array of objects | References Sections used in the ModulePage. Object has ```name``` and ```position``` properties. `name` property is reference to section. ```position``` property is a value representing the section's approximate initial position in the page when displayed Built Studio. The ```position``` property can be between 1 and 20 for body sections and 0 and -20 for head sections.  |
+
+#### Example
+
+```json filename="public/data/module-pages.json" copy
+{
+  "modulePages": [
+    {
+      "name": "contactBase",
+      "page": {
+        "name": "contact"
+      },
+      "sections": [
+        {
+          "name": "contactSeo",
+          "position": 1
+        },
+        {
+          "name": "contactLanding",
+          "position": 2
+        }
+      ]
+    }
+  ]
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/module-pages.json](https://github.com/richjava/corporate-basic/blob/main/public/data/module-pages.json)
+
+### Page data
+
+A Page represents a web page.
+
+#### Page Data Model
+The `public/data/pages.json` JSON file consists of a ```pages``` array. Each object in the array may have the following fields:
+
+| Field          | Type   | Description                                    |
+| -------------- | ------ | ---------------------------------------------- |
+| `name`        | String  | Camel case identifier            |
+| `title`       | String  | (Optional) A succinct label for the Page.  |
+| `contentType` | Object | (Optional) Specified if the page is used as an article. Object has `name` and `config` properties. `name` property is reference to content type. `config` object can have a `populate` array. |
+
+#### Example for a regular page
+
+```json filename="public/data/pages.json" copy
+{
+  "pages": [
+    { "name": "home" },
+    { "name": "services" },
+    { "name": "contact" }
+  ]
+}
+```
+
+#### Example for an article page
+```json filename="public/data/pages.json" copy
+{
+  "pages": [{
+      "name": "blogArticle",
+      "contentType": {
+        "name": "post",
+        "config": {
+          "populate": [
+            {
+              "name": "author",
+              "populate": [
+                {
+                  "name": "profile"
+                }
+              ]
+            },
+            {
+              "name": "tags"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/pages.json](https://github.com/richjava/corporate-basic/blob/main/public/data/pages.json)
+
+### Section data
+
+A Section is a main part of a website page. It contains one or more Templates.
+
+#### Section Data Model
+The `public/data/sections.json` JSON file consists of a ```sections``` array. Each object in the array may have the following fields:
+
+| Field             | Type   | Description                                               |
+| ----------------- | ------ | --------------------------------------------------------- |
+| `name`            | String  | Camel case identifier            |
+| `title`           | String  | A succinct label for the Section  |
+| `type`            | String | Category of section (possible values: "layout","body", "head"). Default: "body".    |
+| `description`     | String | Description of section                                    |
+| `templates`       | Array  | References templates used by section                      |
+| `defaultTemplate` | Object | Template that will be used by default. `name` property is reference to template.                |
+| `data`            | Object | Data for the Section as defined in the content type schema                     |
+| `collections`     | Object  | References collections used by section. Key is the content type name and value is an object with `config` and `article` properties. `config` can have `limit`, `offset` and `populate` properties. `populate` is an array of reference objects. `article` is used as a reference to the module page that is used for the article page (which is a Next.js [dynamic-route](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes#example))                  |
+
+#### Example
+
+```json filename="public/data/sections.json" copy
+{
+  "sections": [{
+      "name": "team",
+      "title": "Team",
+      "description": "An informational section about the people in the company.",
+      "templates": ["profileCards1"],
+      "type": "body",
+      "defaultTemplate": { "name": "profileCards1" },
+      "data": { "heading": "Lorem ipsum dolor sit amet" },
+      "collections": {
+        "author": {
+          "config": { "limit": 3, "populate": [{ "name": "profile" }] }
+        }
+      }
+    }]
+  }
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/sections.json](https://github.com/richjava/corporate-basic/blob/main/public/data/sections.json)
+
+### Template data
+
+A Template represents the user interface of a Section. For example, the UI for a FAQ Section could be designed in a number of ways - an accordian, a list, etc. You can create a template for each of these designs and add them to your Section. Then in the [Built Studio](/built-studio) the end user of the Theme can decide which Template to use for the Section.
+
+A Template contains a reference to a React component. A Template may contain Elements.
+
+The `public/data/templates.json` JSON file consists of a ```templates``` array. Each object in the array may have the following fields:
+#### Template Data Model
+
+| Field         | Type   | Description                                                    |
+| ------------- | ------ | -------------------------------------------------------------- |
+| `name`        | String  | Camel case identifier            |
+| `title`       | String  | A succinct label for the Template  |
+| `category`    | String | Category of section (examples: "banners", "covers")    |
+| `description` | String | Description of pageSection                                     |
+| `repoUrl`     | String | Web address of git repository                                  |
+
+#### Example
+
+```json filename="public/data/templates.json" copy
+{
+  "templates": [{
+      "name": "banner1",
+      "title": "Banner 1",
+      "category": "banners",
+      "namespace": "richjava_corporate-basic",
+      "description": "Full width banner with centered content.",
+      "imageUrl": "https://res.cloudinary.com/dn7feeelf/image/upload/v1725878892/banner1_agmnah.png",
+      "repoUrl": "https://github.com/richjava/corporate/blob/main/components/templates/banners/banner1.tsx"
+    }
+  ]
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/templates.json](https://github.com/richjava/corporate-basic/blob/main/public/data/templates.json)
+
+
+### Collections data
+
+Collection data is kept in json files that have the plural name of the Content Type which defines the data fields, for example "authors.json".
+
+The JSON file consists of a ```data``` array. Along with the data fields for a Content Type, each Entry object in a Collection array must contain the following three fields:
+
+| Field                 | Type   | Description                   |
+| --------------------- | ------ | ----------------------------- |
+| `_id`        | String  | Camel case identifier            |
+| `_type`       | String  | A succinct label for the Collection  |
+| `slug` | String | Lower case name with dashes |
+
+#### Example
+
+```json filename="public/data/collections/authors.json" copy
+{
+  "data": [
+     {
+      "_id": "author-eb4f3b3c-04ed-4e08-b8fb-6b7db6efcb80",
+      "_type": "author",
+      "slug": "bob-brown",
+      "fullName": "Bob Brown",
+      "profile": "profile-fb4f3b3c-04ed-4e08-b8fb-6b7db6efcb60"
+    }
+  ]
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/collections/authors.json](https://github.com/richjava/corporate-basic/blob/main/public/data/collections/authors.json)
+
+### Layout data
+
+Layout specifies the header and footer and any otherf layout sections of a site.
+
+#### Layout Data Model
+The `public/data/layout.json` JSON file consists of a ```layout``` object with the following fields:
+
+| Field      | Type  | Description                              |
+| ---------- | ----- | ---------------------------------------- |
+| `contentIndex`  | Number | The main sections of the page will be placed at this specified index of the `sections` array. |
+| `sections`      | Array  | The layout sections of a site, for example "header" and "footer". Each object in array has a `name` property reference to the section. |
+
+#### Example
+
+```json filename="public/data/layout.json" copy
+{
+  "layout": {
+    "contentIndex": 1,
+    "sections": [
+      {
+        "name": "header"
+      },
+      {
+        "name": "footer"
+      }
+    ]
+  }
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/layout.json](https://github.com/richjava/corporate-basic/blob/main/public/data/layout.json)
+
+### Global data
+
+Global data is available to every page in the site. You can define the Global field names yourself.
+
+The `public/data/global.json` JSON file consists of a ```global``` object with the fields defined in the [Global schema file](#global-schema):
+
+#### Example
+
+```json filename="public/data/global.json" copy
+{
+  "global": {
+    "name": "Blog Basic",
+    "logo": {
+      "url": "https://res.cloudinary.com/dn7feeelf/image/upload/v1725870579/builtjs_bert2m.svg",
+      "path": "/images/builtjs.svg",
+      "width": 45,
+      "height": 45
+    }
+  }
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/global.json](https://github.com/richjava/corporate-basic/blob/main/public/data/global.json)
+
+
+### App data
+
+App data describes the theme or plugin. For a theme, this data is located in `public/data/theme.json`. For a plugin, it will be in `public/data/plugin.json`.
+
+
+#### Shared Data Model for themes and plugins
+The `public/data/theme.json` or `public/data/plugin.json` JSON file consists of a ```theme``` or ```plugin``` object with the following fields:
+
+| Field         | Type   | Description                              |
+| ------------- | ------ | ---------------------------------------- |
+| `title`       | String | Name of Theme                            |
+| `namespace`   | String | Unique name which uses this name convention: `[provider]_[owner]_[repo-name]`. For example, `gh_richjava_builtjs_corporate`. Values for `provider` can be `gh` (Github), `gl` (Gitlab), or `bb` (Bitbucket). |
+| `description` | String | Description of Theme                     |
+| `imageUrl`    | String | Image to represent Theme                 |
+| `demoUrl`     | String | (Optional) Web address of demo website              |
+| `repoUrl`     | String | (Optional) Git repository web address               |
+| `config`      | Object | (Optional) May specify the Node dependencies and dev dependencies to be installed into the built site |
+| `designSystem`| String | (Optional) Name of [design system](/docs/design-systems/introduction) (camel case) |
+
+#### Theme-specific App Data
+A theme also has the following field:
+| Field         | Type   | Description                              |
+| ------------- | ------ | ---------------------------------------- |
+| `plugins`     | Array  | Plugins included in theme (referenced by plugin namespace) |
+
+#### Example `theme.json`
+
+```json filename="public/data/theme.json" copy
+{
+  "theme": {
+    "title": "Corporate Basic",
+    "namespace": "richjava_corporate-basic",
+    "description": "Small business theme with basic Tailwind styling.",
+    "imageUrl": "https://res.cloudinary.com/dn7feeelf/image/upload/v1725878838/theme_tjckpi.png",
+    "demoUrl": "https://builtjs-theme-corporate.vercel.app",
+    "repoUrl": "https://github.com/richjava/corporate-basic",
+    "designSystem": "basic"
+    "plugins": ["richjava_blog-basic", "richjava_about-basic"],
+  }
+}
+```
+
+[https://github.com/richjava/corporate-basic/blob/main/public/data/theme.json](https://github.com/richjava/corporate-basic/blob/main/public/data/theme.json)
+
+#### Plugin-specific App Data
+A plugin also has the following field:
+| Field         | Type   | Description                              |
+| ------------- | ------ | ---------------------------------------- |
+| `mainModule`  | Object  | The module used for the plugin. `name` property is reference to module. |
+
+#### Example `plugin.json`
+
+```json filename="public/data/plugin.json" copy
+{
+  "plugin": {
+    "namespace": "richjava_blog-basic",
+    "title": "Blog Basic",
+    "description": "Blog plugin with basic Tailwind styling.",
+    "imageUrl": "https://res.cloudinary.com/dn7feeelf/image/upload/v1725870580/plugin_cqm0dq.png",
+    "demoUrl": "https://builtjs-plugin-blog-basic.vercel.app",
+    "repoUrl": "https://github.com/richjava/blog-basic",
+    "mainModule": {
+      "name": "blog"
+    },
+    "config": {
+      "dependencies": ["date-fns"]
+    }
+  }
+}
+```
+
+[https://github.com/richjava/blog-basic/blob/main/public/data/plugin.json](https://github.com/richjava/blog-basic/blob/main/public/data/plugin.json)
+
+
+---
+
+If you haven't done so already, find out more about Built.js [concepts](/docs/concepts/concepts-overview).

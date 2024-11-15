@@ -3,8 +3,6 @@ title: Module page data
 description: Module page data concepts for Built.js themes and plugins.
 ---
 
-# Module Page
-
 A Module Page is a page with sections that belongs to a particular module. For example, if you want to have a module called "contact" for users to be able to get in touch, you may want:
 - A contact page with a landing section that has your contact details
 - A section on the services page that will encourage users to go to the contact page
@@ -15,19 +13,10 @@ You can specify the landing section for the contact page like this:
   "modulePages": [
     {
       "name": "contactBase",
-      "description": "Contact page base sections",
-      "page": {
-        "name": "contact"
-      },
+      "page": { "name": "contact" },
       "sections": [
-        {
-          "name": "contactSeo",
-          "position": 0
-        },
-        {
-          "name": "contactLanding",
-          "position": 1
-        }
+        { "name": "contactSeo", "position": 1 },
+        { "name": "contactLanding", "position": 2 }
       ]
     }
   ]
@@ -42,7 +31,6 @@ And the services page section, like this:
     ...
     {
       "name": "servicesContactTeaser",
-      "description": "Teaser for Contact page on Services page",
       "page": {
         "name": "services"
       },
@@ -57,7 +45,7 @@ And the services page section, like this:
 }
 ```
 
-NOTE: The "position" property can have a number value from 0 upwards which specifies where a section should appear on the page. A section with a position of 0 would be at the top of the page ones with higher values being below that.
+NOTE: The "position" property can have a number value from 1 upwards which specifies where a section should appear on the page. A section with a position of 1 would be at the top of the page ones with higher values being below that.
 
 Now you have some module pages, you can include them in your module, like this:
 ```json title="public/data/modules.json" copy

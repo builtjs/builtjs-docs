@@ -1,4 +1,4 @@
 {
   "title": "Docs",
-  "pages": ["index", "concepts", "guides", "design-systems"]
+  "pages": ["index", "concepts", "guides", "design-systems", "data-model-reference"]
 }

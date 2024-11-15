@@ -9,16 +9,16 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ## What is a theme?
 
-A [theme](/docs/concepts/theme) is a Next.js app which has [data files](/docs/concepts/data-files). It is used for creating Next.js websites that have a Sanity content management system. 
+A [theme](/docs/concepts/theme) is a Next.js app which has [data files](/docs/data-model-reference). It is used for creating Next.js websites that have a Sanity content management system. 
 
-A theme can have any number of [modules](/docs/concepts/module). A module represents a business use case, and contains all the pages and sections to fulfill the use case. It has [module pages](/docs/concepts/module-page), each of which assigns sections to a page. Consequently, a [page](/concept/page) is "dumb", not directly determining its sections.
+A theme can have any number of [modules](/docs/concepts/module). A module represents a business use case, and contains all the pages and sections to fulfill the use case. It has [module pages](/docs/concepts/module-page), each of which assigns sections to a page. Consequently, a [page](/concepts/page) is "dumb", not directly determining its sections.
 
 A [section](/docs/concepts/section) determines the content. It can have one or more [templates](/docs/concepts/template) which display the content differently, giving the end user of the theme a number of options for the section's user interface. A section can have a number of [collections](/docs/concepts/collections). A collection is a group of items, or entries, of a certain [content type](/docs/concepts/content-type). Collections may or may not have an associated [article] page(/docs/concepts/article).
 
 You may wish to have small reusable content types such as that can be used for UI components. These are called [elements](/docs/concepts/elements).
 
 
-A theme can also have any number of [plugins](/docs/concepts/plugin). A plugin is a single module which is external to the theme. You may also need to store global data for your theme. The [global](/concept/global) content type can used for this purpose. Currently, Built.js themes and sites are limited to one common [layout](/concpets/layout) for all pages.
+A theme can also have any number of [plugins](/docs/concepts/plugin). A plugin is a single module which is external to the theme. You may also need to store global data for your theme. The [global](/concepts/global) content type can used for this purpose. Currently, Built.js themes and sites are limited to one common [layout](/concpets/layout) for all pages.
 
 ## How are themes created?
 If you know how to create React components, you can easily create your own theme by following the following steps:
@@ -27,7 +27,7 @@ If you know how to create React components, you can easily create your own theme
 <Step>
 ### Create the theme's definitions in Built Studio
  
-To create a theme, you can use the [Built Studio](/built-studio) Designer to define the modules, pages, sections and other items.
+To create a theme, you can use the [Built Studio](https://www.builtjs.com) Designer to define the modules, pages, sections and other items.
 </Step>
 <Step>
 ### Export the theme, set up the Next.js theme project, and create components

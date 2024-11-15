@@ -3,31 +3,32 @@ title: Plugin concepts
 description: Plugin concepts for Built.js themes and plugins.
 ---
 
-# Plugin
-
 Plugins can add new functionality or extend existing functionality for your site. A plugin will be included in a theme as a module. It includes all the pages, sections, content types and other data and functionality to fulfill a use case. For example, a "blog" plugin could be included in a theme, and this would allow a user to view a page that has a list of blog entries, a blog article page, and more.
 A Built.js plugin, from a technical point of view, is very similar to a theme in the following ways:
 - It is a Next.js project
-- It is defined with [data files](/docs/concepts/data-files)
+- It is defined with [data files](/docs/data-model-reference)
 - It requires a namespace
 
 It differs from a theme because:
 - It only has one module (but, like a theme's main modules, this module can have submodules)
 
+Here is an example:
+
+Code: [https://github.com/richjava/blog-basic](https://github.com/richjava/blog-basic)<br/>
+Demo: [https://builtjs-plugin-blog.vercel.app](https://builtjs-plugin-blog.vercel.app)
 
 ## Plugin namespace
 A plugin needs a namespace (which is a short string) so that it doesn't have naming conflicts with the hosting theme and other plugins used in the theme. A namespace follows this naming convention: 
-- provider ("gh" for Github, "gl" for Gitlab, and "bb" for Bitbucket)
 - owner
 - repo name
-```[provider]-[owner]-[repo-name]```
+```[owner]_[repo-name]```
 
 This namespace will be used in the plugin project in the path of:
 - components
 - api
 - styles
 So instead of components being located at ```components/templates``` they should be made available at ```components/plugins/[plugin-name]/templates```. Similarly, api routes should be at ```pages/api/plugins/[api-name]```.
-For example, in the "gh_richjava_blog" plugin, for a React component that is located at ```components/plugins/gh_richjava_blog/templates/lists/list2/list2.tsx```, when the end user of the theme exports it, the "List2" component is built into the home page of the site as ```GhRichjavaBlogList2```, like this:
+For example, in the "richjava_blog" plugin, for a React component that is located at ```components/plugins/richjava_blog/templates/lists/list2/list2.tsx```, when the end user of the theme exports it, the "List2" component is built into the home page of the site as ```GhRichjavaBlogList2```, like this:
 
 ```tsx title="pages/index.tsx" copy {8,27}
 import React from "react";
@@ -89,12 +90,12 @@ To add a plugin to a theme that you already have in the Built.js Studio, you can
 ```json title="theme.json" copy
 {
   "theme": {
-    "namespace": "gh_richjava_builtjs-theme-corporate",
+    "namespace": "richjava_builtjs-theme-corporate",
     "title": "Corporate",
     "description": "Small business theme with basic Tailwind styling.",
     "imageUrl": "https://cdn.jsdelivr.net/gh/richjava/builtjs-theme-corporate/public/images/theme/theme.png",
     "demoUrl": "https://builtjs-theme-corporate.vercel.app",
-    "plugins": ["gh_richjava_builtjs-plugin-blog"],
+    "plugins": ["richjava_builtjs-plugin-blog"],
     "config": {
       "dependencies": [],
       "devDependencies": []

@@ -3,8 +3,6 @@ title: Article data
 description: Article data concepts for Built.js themes and plugins.
 ---
 
-# Article
-
 An Article is the detail page for an entry of a collection. You can specify whether or not you want a collection of entries in a particular section to have to have an article. For example, a section may contain list of blog entries, and clicking on any of these list items would take you to the entry's article page. 
 
 In the Theme/Plugin Designer in [Built Studio](/built-studio), you can specify whether a section collection should have an article.
@@ -28,7 +26,11 @@ After exporting the theme or plugin, if you look in ```public/data/sections.json
               "0": "date:asc"
             },
             "limit": 1,
-            "populate": ["tags"]
+            "populate": [
+              {
+                "name": "tags"
+              }
+            ]
           },
           "article": {
             "name": "blogArticle"
@@ -42,8 +44,12 @@ After exporting the theme or plugin, if you look in ```public/data/sections.json
 
 By default, an "entry" object will be made available to every template in the the article page, like this example:
 
-```tsx title="components/templates/articles/profile-article1/profile-article1.tsx" copy
-export default function ProfileArticle1({ content }:any) {
+```tsx title="components/templates/articles/profile-article1.tsx" copy
+import Image from "next/image";
+import { urlForImage } from "@/builtjs-utils";
+import { PortableText } from "@portabletext/react";
+
+export default function ProfileArticle1({ content }: any) {
   if (!content) return <></>;
   let { entry: author = null } = { ...content };
 
@@ -51,25 +57,27 @@ export default function ProfileArticle1({ content }:any) {
   return (
     <article id="profile-article1" className="template">
       {author && (
-        <div className="max-w-screen-xl mx-auto">
-          <header className="max-w-4xl mx-auto">
-            <span className={`preheading blank left`}>
-              {profile?.position}
-            </span>
+        <div className="relative max-w-4xl pb-20 mx-auto">
+          <header>
+            <span className={`preheading blank left`}>{profile?.position}</span>
             <div className="flex items-center">
-              <h1>{author.fullName}</h1>
+              <h1 className="mb-10 heading-xxl">{author.fullName}</h1>
             </div>
           </header>
-          {profile.profileImage && <div className="relative mb-20">
-            <Image
-              src={urlForImage(profile?.profileImage)}
-              width={widthForImage(profile?.profileImage)}
-              height={heightForImage(profile?.profileImage)}
-              layout="responsive"
-              alt={author.fullName}
-            />
-          </div>}
-          <BlockContent blocks={profile?.bio} />
+          {profile.profileImage && (
+            <div className="relative mb-20">
+              <div className="h-96">
+                <Image
+                  className="object-cover"
+                  src={urlForImage(profile?.profileImage)}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  alt={author.fullName}
+                />
+              </div>
+            </div>
+          )}
+          <PortableText value={profile?.bio} />
         </div>
       )}
     </article>
@@ -82,10 +90,10 @@ You need to specify the page that will be used for the article. In your Next.js 
 ```tsx title="pages/author/[slug].tsx" copy
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { withRouter } from "next/router";
-import { getConfig, getEntries } from "@builtjs/theme";
-import Page from "@/lib/page";
-import { entrySlug } from "@/lib/utils";
-import { pages } from "@/lib/constants";
+import { getConfig, fetchEntries } from "@builtjs/theme";
+import Page from "lib/theme/page";
+import { entrySlug } from "@/builtjs-utils";
+import { pages } from "lib/theme/constants";
 
 export default withRouter(Page);
 
@@ -115,14 +123,9 @@ In your configuration, you also need to define the content type of the entry tha
     ...
     {
       "name": "authorArticle",
-      "title": "Author Article",
       "contentType": {
         "name": "author",
-        "config": {
-          "populate": [{
-            "name": "profile"
-          }]
-        }
+        "config": { "populate": [{ "name": "profile" }] }
       },
       ...
     },

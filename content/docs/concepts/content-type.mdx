@@ -3,8 +3,6 @@ title: Content type data
 description: Content type data concepts for Built.js themes and plugins.
 ---
 
-# ContentType
-
 A content type defines the fields for an entry of a collection (see "[Collections and entries](/docs/concepts/collections-and-entries)").
 
 This is an example of an "author" content type and the author's profile:
@@ -60,6 +58,8 @@ This is an example of an "author" content type and the author's profile:
   ]
 }
 ```
+
+The `dataPosition` property is used during the setup process for a site. It determines the order of creation for Sanity schemas and is used when you need to create a schema before or after another due to the relationship.
 
 The fields available for a content type are:
 
@@ -153,7 +153,7 @@ A relation describes a relationship between this content type and another.
 | -------- | ------------------------------- | -------- |
 | type     | The data type                   | true     |
 | target   | The name of the relation content type. | true |
-| relation | `onToOne` or `manyToOne`        | true     |
+| relation | `onToOne`, `manyToOne` or `oneToMany`  | true     |
 | required | Determines if value is required. Default: `false` | false    |
 
 ## `string`
