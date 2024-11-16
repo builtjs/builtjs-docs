@@ -21,18 +21,15 @@ The code to create this module in your Built.js Theme would look like this:
 ```json title="public/data/modules.json" copy
 {
   "modules": [
-    {
-      "name": "about",
-      "title": "About",
-      "description": "Provides information related to the organisation",
+        {
+      "title": "Contact",
+      "description": "Encourages and facilitates making contact",
+      "name": "contact",
       "modulePages": [
-        {
-          "name": "aboutBase"
-        },
-        {
-          "name": "homeAboutTeaser"
-        }
-      ]
+        { "name": "contactBase" },
+        { "name": "servicesContactTeaser" }
+      ],
+      "required": false
     }
   ]
 }
