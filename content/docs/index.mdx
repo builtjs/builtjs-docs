@@ -1,49 +1,29 @@
 ---
-title: Quick Start
-description: Get started with Built.js themes and plugins
+title: Introduction to Built.js
+description: An overview of the platform
 ---
-
-import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 **Built.is** is a platform for creating and managing reusable website themes and plugins for quick and easy creation of CMS-backed [Next.JS](https://nextjs.org) websites. 
 
-Make modular themes and plugins in Javascript and use the [Built Studio](/built-studio) to build sites from them. 
- 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/8hsiE7xXQcE?si=d4522ZCFbXxXZq2Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+## The Problem
+### 1. Complexity with Modern Tools:
+- Frameworks like Next.js and headless CMS platforms like Sanity offer powerful tools for creating web applications. However, combining these tools often requires advanced skills, significant effort, and custom code to integrate the CMS seamlessly into a project.
+- Developers face challenges in setting up tailored CMS solutions that match the exact needs of a website, often resorting to building or heavily customizing CMS functionality from scratch.
 
-If you just want to get a feel for how Built.js works, you can:
+### 2. Lack of Modular Extensibility:
+- While monolithic platforms like WordPress excel in extensibility through themes and plugins, this level of flexibility and modularity is typically absent in modern, decoupled ecosystems.
+- Developers working with modern stacks often have no standardized way to build, share, or apply themes and plugins across projects.
 
-<Steps>
-<Step>
-### Create a theme
- 
-To create a theme, you can either use the [Built Studio](https://builtjs.com) Theme Designer or you can clone an existing theme:
-```bash copy
-git clone https://github.com/richjava/corporate-basic.git
-```
-Follow the directions in the project's README to set up and run the theme.
-</Step>
-<Step>
-### Publish the theme
- 
-To be able to use your theme to create sites with in [Built Studio](https://builtjs.com), run this:
-```bash copy
-npx create-built-app publish
-```
-</Step>
-<Step>
-### Create a site
- 
-In [Built Studio](https://builtjs.com), select the theme you published, choose the modules for the site, and export the site. You can follow the README to set up and run the site.
-</Step>
+## How Built.js Solves It
+- **Simplifies Tailored CMS Creation:** Built.js integrates the best of a modern web framework like Next.js with a simplified process for setting up a custom CMS. Developers can focus on creating content and functionality without worrying about the complex integration overhead.
+- **Enables Theme and Plugin Ecosystems:** Like WordPress, Built.js empowers developers to build and distribute themes and plugins, but in a modern, decoupled architecture. This opens the door to sharing, reusing, and customizing website components with ease, bringing the extensibility of monolithic platforms to headless setups.
+- **Developer-Focused Approach:** Built.js offers tools like `create-built-app` for rapid project setup and maintenance, reducing the friction of repetitive tasks.
 
-</Steps>
+### How it works:
+Built.js uses configuration files and JSON schemas to set up themes and plugins. These configurations are central to defining the behavior and structure of a theme or plugin.
 
-## Learn more
-To familiarize yourself more, check out the [Concepts](/docs/concepts/concepts-overview), [Guides](/docs/guides/guides-overview) and the [Data Modal Reference](/docs/data-model-reference).
-
-<Cards>
-  <Card title="Concepts" href="/docs/concepts/concepts-overview" />
-  <Card title="Guides" href="./docs/guides/guides-overview" />
-  <Card title="Data Model Reference" href="/docs/data-model-reference" />
-</Cards>
+### CLI Tool (create-built-app):
+Built.js provides a command-line tool, `create-built-app`, to automate the configuration and setup process. For example:
+- The `init` command in dynamically loads a theme or plugin into a Next.js project.
+- The `publish` command in create-built-app allows you to publish themes or plugins to Built.js Studio.
+- The `update` command updates the theme when plugins are added or removed from theme.json​
