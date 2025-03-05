@@ -4,6 +4,10 @@ description: Reference for the Built.js Data Model
 ---
 import { File, Folder, Files } from "fumadocs-ui/components/files";
 
+<Callout type="info">
+  NOTE: Data is compiled into `.built/data.json` by running `npx create-built-app update`
+</Callout>
+
 The Built.js data model is represented in a theme or plugin Next.js project by JSON data files in the ```public/data``` directory of the project. 
 
 Data files contain JSON data used for configuration of theme or plugin's pages, sections, plugins and more. They are kept in ```public/data```.  
@@ -37,6 +41,54 @@ These are the folders and files that you will find in this directory for a theme
 <Callout type="info">
   For a plugin, you will find a `plugin.json` file instead of `theme.json`. See [App data](#app-data)
 </Callout>
+
+Here's a summary of how they work together:
+1. `global.json`
+- Contains site-wide settings like site name and logo.
+2. `theme.json`
+- Defines the theme's metadata, including namespace, title, description
+- Lists required plugins and dependencies
+- Specifies design system
+3. `sections.json`
+- Defines reusable page sections (e.g., homeSeo, homeLanding, header, footer)
+- Each section has:
+  - Configuration data
+  - Template assignments
+  - Type (head, body, or layout)
+  - Collection references
+4. `templates.json`
+- Defines available templates for different components
+- Includes metadata like category, namespace, and description
+- References to actual component implementations
+5. `layout.json`
+- Defines the global layout structure
+- Specifies order of sections (header, content, footer)
+6. `pages.json`
+- Lists all pages in the site
+7. `modules.json` and module-pages.json
+- Defines modular components that can be used across pages
+- Maps modules to specific pages and positions
+8. `schemas/ directory`
+- Contains schema definitions for sections, content types, and global settings
+- Provides validation and structure for the content
+9. plugins/ directory
+- Contains plugin-specific data configurations
+
+The structure follows a modular, component-based architecture where:
+- Global settings define site-wide configurations
+- Sections are reusable components
+- Templates define the visual implementation
+- Modules provide functionality
+- Everything is tied together through pages and layouts
+
+This setup allows for:
+- Easy theme customization
+- Reusable components
+- Flexible page layouts
+- Plugin extensibility
+- Clear separation of concerns between content, layout, and functionality
+
+This is a more detailed breakdown of the data files:
 
 ## Schema files
 These files, located in ```public/data/schemas```, create the definitions that will be used for [Sanity](https://sanity.io) schemas when the site is built.
