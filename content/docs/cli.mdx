@@ -1,0 +1,140 @@
+---
+title: Built.js CLI
+description: The Built.js CLI is a powerful command-line tool for creating and managing Built.JS applications, themes, and plugins. This document provides an overview of available commands and their usage.
+---
+
+## Usage
+
+```bash
+npx create-built-app [command]
+```
+<Callout type="info">
+Many of the commands of the Built.js CLI require your Built.js API key. You can find this in Build Studio by clicking your profile picture in the header and selecting "API Key".
+</Callout>
+
+## Available Commands
+
+### `define`
+Creates a [mermaid](https://mermaid.js.org/) sitemap in the root of your project. This sitemap will be used by the AI model to create files and templates for the theme or plugin in the `design` command.
+
+```bash
+npx create-built-app define
+```
+
+### `design`
+Creates data files and templates using the [mermaid](https://mermaid.js.org/) sitemap in the root of the project. This command has several options to run specific tools:
+
+```bash
+npx create-built-app design [options]
+```
+
+Options:
+- `--templates`: Run only the templates tool
+- `--collections`: Run only the collections tool
+- `--global`: Run only the global tool
+- `--layout`: Run only the layout tool
+- `--modules`: Run only the modules tool
+- `--sections`: Run only the sections tool
+- `--schemas`: Run only the schemas tool
+- `--page-content-types`: Run only the pageContentTypes tool
+- `--template-descriptions`: Run only the templateDescriptions tool
+- `--pages`: Run only the pages tool
+
+### `publish`
+Imports your theme or plugin into Built Studio where they can be used to create sites.
+
+```bash
+npx create-built-app publish [options]
+```
+
+Options:
+- `-t, --type <type>`: Type of project (theme or plugin), defaults to 'theme'
+
+### `init`
+Creates the necessary files in a fresh Next.js app, used for themes, plugins and sites.
+<Callout type="info">
+This command is run on a the parent directory of a Next.js app. This directory must have been created either by export of the theme or plugin from Built Studio, or by creating a new theme or plugin using the `new` command (see below).
+</Callout>
+```bash
+npx create-built-app init
+```
+
+### `setup`
+Sets up your site with Sanity data.
+<Callout type="info">
+The `setup` command is not used for themes and plugins, only sites.
+</Callout>
+
+```bash
+npx create-built-app setup
+```
+
+### `update`
+Updates your theme or plugin. To be run whenever updates are made to data in the `public/data` directory.
+
+```bash
+npx create-built-app update [options]
+```
+
+Options:
+- `--plugins`: Include plugins in the update
+- `--screenshots`: Update screenshots for all sections
+- `-p, --port <number>`: Specify the port number of the Next.js app
+
+### `new`
+Creates new Built.JS resources.
+
+```bash
+npx create-built-app new <type>
+```
+
+Supported types:
+- `theme`: Create a new theme
+- `plugin`: Create a new plugin
+- `template`: Create a new template
+
+#### Creating a Theme
+When creating a theme, you'll be prompted for:
+- Theme name
+- Theme description (used as AI prompt)
+- Username (must be alphanumeric with hyphens)
+
+#### Creating a Plugin
+When creating a plugin, you'll be prompted for:
+- Plugin name
+- Plugin description (used as AI prompt)
+- Username (must be alphanumeric with hyphens)
+
+#### Creating a Template
+When creating a template, you'll be prompted for:
+- Section name (optional, leave empty to process all sections)
+- Template UI description (used as AI prompt)
+
+## Environment Setup
+
+Here are the environment variables required for specific commands:
+
+### Required Environment Variables
+
+#### For `define` and `design` commands to create themes and plugins using your own AI model:
+- `OPENAI_API_KEY`: Your OpenAI API key for AI-powered template generation
+- `UNSPLASH_ACCESS_KEY`: Your Unsplash API key for image generation (optional)
+
+#### For set up of Sanity data for a site:
+- `NEXT_PUBLIC_SANITY_PROJECT_ID`: The Sanity project ID
+- `NEXT_PUBLIC_SANITY_WRITE_TOKEN`: The Sanity project's write token
+
+<Callout type="info">
+These credentials can be found on [the Sanity project management dashboard](https://www.sanity.io/manage)
+</Callout>
+<Callout type="warn">
+Never commit your `.env` file to version control. It should be listed in your `.gitignore` file.
+</Callout>
+
+## Best Practices
+
+1. Use the `--help` flag to see command-specific options
+2. When creating new resources, provide detailed descriptions for better AI-generated results
+3. Keep your project data up to date using the `update` command
+4. Use the `publish` command to make your theme or plugin available in Built Studio
+

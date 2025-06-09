@@ -15,13 +15,17 @@ A theme can have any number of [modules](/docs/concepts/module). A module repres
 
 A [section](/docs/concepts/section) determines the content. It can have one or more [templates](/docs/concepts/template) which display the content differently, giving the end user of the theme a number of options for the section's user interface. A section can have a number of [collections](/docs/concepts/collections). A collection is a group of items, or entries, of a certain [content type](/docs/concepts/content-type). Collections may or may not have an associated [article] page(/docs/concepts/article).
 
-You may wish to have small reusable content types such as that can be used for UI components. These are called [elements](/docs/concepts/elements).
+You may wish to have small reusable content types that can be used for UI components. You could use simple object or alternatively, you could use [elements](/docs/concepts/elements).
 
 
 A theme can also have any number of [plugins](/docs/concepts/plugin). A plugin is a single module which is external to the theme. You may also need to store global data for your theme. The [global](/concepts/global) content type can used for this purpose. Currently, Built.js themes and sites are limited to one common [layout](/concpets/layout) for all pages.
 
 ## How are themes created?
-If you know how to create React components, you can easily create your own theme by following the following steps:
+If you know how to create React components, you can easily create your own theme. You can:
+1. Create a theme through the Built.js CLI: ```npx create-built-app new theme```
+2. Create a theme manually through Built Studio.
+
+To create a theme maually through Built Studio, follow the following steps:
  
 <Steps>
 <Step>

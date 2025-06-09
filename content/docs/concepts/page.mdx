@@ -20,3 +20,37 @@ After you've exported the theme/plugin from [Built Studio](/built-studio), you c
   ```
 
 In order to specify which sections belong on a page, you need to create a [module page](/docs/concepts/module-page). 
+
+If a page is for an article page (i.e. a page which has a route like `pages/post/[slug].js`), the page object is required to have a contentType property, for example:
+```json title="public/data/pages.json" copy
+  {
+    "pages": [
+      {
+        "name": "blogArticle",
+        "contentType": {
+          "name": "post",
+          "config": {
+            "populate": [
+              {
+                "name": "author",
+                "type": "author",
+                "populate": [
+                  {
+                    "name": "profile",
+                    "type": "profile"
+                  }
+                ]
+              },
+              {
+                "name": "tags",
+                "type": "tag"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+```
+
+Learn more about articles [here](/docs/concepts/article).

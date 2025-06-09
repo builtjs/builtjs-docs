@@ -3,9 +3,11 @@ title: Article data
 description: Article data concepts for Built.js themes and plugins.
 ---
 
-An Article is the detail page for an entry of a collection. You can specify whether or not you want a collection of entries in a particular section to have to have an article. For example, a section may contain list of blog entries, and clicking on any of these list items would take you to the entry's article page. 
+An Article is the detail page for an entry of a collection and it would have a dynamic route like ```pages/post/[slug].tsx```.
 
-In the Theme/Plugin Designer in [Built Studio](/built-studio), you can specify whether a section collection should have an article.
+You can specify whether or not you want a collection of entries in a particular section to have to have an article. For example, a section may contain list of blog entries, and clicking on any of these list items would take you to the entry's article page. 
+
+In the Theme/Plugin Designer in [Built Studio](/built-studio), you can specify whether a section's collection should have an article.
 After exporting the theme or plugin, if you look in ```public/data/sections.json```, you can find the section that you specified to have a collection with article, and you will see the corresponding collection will have an article property. In the example below, the ```name``` property for the article is "blogArticle". This is the name of the ModulePage that you want to use for the article page (it defines which page and sections to use):
 
 ```json title="public/data/sections.json" copy

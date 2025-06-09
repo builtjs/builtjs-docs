@@ -16,3 +16,50 @@ Once you have exported the theme or plugin, you will see these values in the pro
     </Folder>
   </Folder>
 </Files>
+
+This is an example of theme app data in ```public/data/theme.json```:
+
+```
+{
+  "theme": {
+    "namespace": "richjava_corporate-shadcn",
+    "title": "Corporate ShadCN",
+    "description": "A modern corporate website theme built with Next.js and ShadCN UI.",
+    "plugins": ["richjava_social-proof-shadcn", "richjava_about-shadcn"],
+    "imageUrl": "https://res.cloudinary.com/dn7feeelf/image/upload/v1733735967/builtjs/theme/richjava_corporate-shad-cn/home-cover1.png",
+    "demoUrl": "https://corporate-shadcn.vercel.app/",
+    "repoUrl": "https://github.com/richjava/corporate-shadcn",
+    "config": {
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "next-themes",
+        "tailwind-merge"
+      ]
+    }
+  }
+}
+```
+
+And this is an example of plugin app data in ```public/data/plugin.json```:
+
+```
+{
+  "plugin": {
+    "namespace": "richjava_blog-basic",
+    "title": "Blog Basic",
+    "description": "Blog plugin with basic Tailwind styling.",
+    "imageUrl": "https://res.cloudinary.com/dn7feeelf/image/upload/v1725870580/plugin_cqm0dq.png",
+    "demoUrl": "https://builtjs-plugin-blog-basic.vercel.app",
+    "repoUrl": "https://github.com/richjava/blog-basic",
+    "mainModule": {
+      "name": "blog"
+    },
+    "config": {
+      "dependencies": ["date-fns", "@portabletext/react"]
+    }
+  }
+}
+```

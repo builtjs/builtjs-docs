@@ -27,6 +27,7 @@ This namespace will be used in the plugin project in the path of:
 - components
 - api
 - styles
+
 So instead of components being located at ```components/templates``` they should be made available at ```components/plugins/[plugin-name]/templates```. Similarly, api routes should be at ```pages/api/plugins/[api-name]```.
 For example, in the "richjava_blog" plugin, for a React component that is located at ```components/plugins/richjava_blog/templates/lists/list2/list2.tsx```, when the end user of the theme exports it, the "List2" component is built into the home page of the site as ```GhRichjavaBlogList2```, like this:
 

@@ -1,5 +1,5 @@
 ---
-title: How to create a theme
+title: How to manually create a theme
 description: How to create a theme
 ---
 
@@ -11,7 +11,7 @@ It's easy to create a reusable theme using [Built Studio](/built-studio) and you
 <Step>
 ### Create and configure a theme in Built Studio 
  
-In the themes workspace of Built Studio, click the "Create Theme" button. Use the Theme Designer to define all the pages, sections, collections and other items for your theme.
+In the themes workspace of Built Studio, click the "Create Theme" button. You can choose to create a theme using the Built.js CLI, which requires an OpenAI API Key, but this guide focusses on creating one manually through Built Studio. Select the "Manual Creation" option, give your theme a name and click the "Create Theme" button. Use the Theme Designer to define all the pages, sections, collections and other items for your theme.
  </Step>
  <Step>
 ### Export the and set up the theme
@@ -22,7 +22,7 @@ Download and extract the theme zip file and follow the instructions in the `READ
 ### Update the theme's plugins
 Run:
 ```bash copy
-npx create-built-app update
+npx create-built-app update --plugins
 ```
 </Step>
 <Step>
